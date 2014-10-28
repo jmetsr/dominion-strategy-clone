@@ -1,0 +1,17 @@
+<h1> Dominion </h1>
+<ul>
+  <% @topics.each do |topic| %>
+  <li> <%= topic.title %>
+    <% if current_user && current_user.admin %>
+    <form action="<%= topic_url(topic) %>" method="post">
+
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Remove">
+    </form>
+    <% end %>
+  </li>
+  <% end %>
+</ul>

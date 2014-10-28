@@ -3,14 +3,42 @@
 <head>
   <title>DominionStrategyClone</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+  <style>
+  .navigation-bar{
+    width: %100;
+  }
+  </style>
+
+
+
+
 </head>
 <body>
-<% if !logged_in %>
-<%= link_to('Register', new_user_url) %>
-<%= link_to('Login', new_session_url) %>
+  <div class="navigation-bar">
+  <h1>Dominion Strategy Forum</h1>
+  <%= flash.now[:errors] %>
+<% if logged_in %>
+
+  <%= "Hello #{current_user.username} "%>
+  <form action="<%= session_url %>" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+    <input type="submit" value="logout">
+  </form>
+
+    <% if current_user.admin %>
+    <%= link_to('create topic', new_topic_url) %>
+    <% end %>
+
+<% else %>
+  <%= link_to('REGISTER', new_user_url) %>
+  <%= link_to('LOGIN', new_session_url) %>
 <% end %>
+  </div>
 <%= yield %>
 
 </body>
