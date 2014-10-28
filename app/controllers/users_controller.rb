@@ -4,11 +4,10 @@ class UsersController < ApplicationController
   end
   
   def new
-    
     @user = User.new
-
   end
   def create
+    @user = User.new(user_params)
   end
   
   def show
@@ -17,5 +16,8 @@ class UsersController < ApplicationController
   def edit
   end
   def update
+  end
+  def user_params
+    params.require(:user).permit(:username,:password)
   end
 end
