@@ -18,6 +18,12 @@ class SubjectsController < ApplicationController
   def show
     @subject = Subject.find_by_id(params[:id])
   end
+  def destroy
+    @subject = Subject.find_by_id(params[:id])
+    @topic = @subject.topic
+    @subject.destroy
+    redirect_to(topic_url(@topic))
+  end
   def subject_params
     params.require(:subject).permit(:title,:body,:user_id,:topic_id)
   end

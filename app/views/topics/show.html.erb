@@ -2,5 +2,6 @@
 <% @topic.subjects.each do |subject| %>
   <%= subject.title %>
 <% end %>
-
+<% if logged_in %>
 <%= link_to("New Topic", new_topic_subject_url(@topic)) %>
+<% end %>

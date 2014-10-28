@@ -1,5 +1,11 @@
 <%= @subject.title %>
 <%= @subject.body %>
 <%= @subject.topic.title %>
-<form>
-</form>
+<% if current_user.id == @subject.user_id%>
+  <form action="<%= topic_subject_url %>" method="post">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="remove topic">
+
+  </form>
+<% end %>
