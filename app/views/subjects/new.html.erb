@@ -1,0 +1,10 @@
+<h1><%= Topic.find_by_id(params[:topic_id]).title %></h1>
+<h1> Start new topic </h1>
+<form action="<%= topic_subjects_url%>" method="post">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+<input type="text" name="subject[title]" value="<% @subject.title %>">
+<input type="text" name="subject[body]" value="<% @subject.body %>">
+<input type="hidden" name="subject[user_id]" value="<%= current_user.id %>">
+<input type="hidden" name="subject[topic_id]" value="<%= params[:topic_id] %>">
+<input type="submit" value="post">
+</form>

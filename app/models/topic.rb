@@ -6,5 +6,11 @@ class Topic < ActiveRecord::Base
       :class_name => "User",
       primary_key: :id,
       foreign_key: :admin_in
-    )
+  )
+  has_many(
+      :subjects,
+      :class_name => "Subject",
+      primary_key: :id,
+      foreign_key: :topic_id
+  )
 end

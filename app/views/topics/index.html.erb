@@ -1,7 +1,7 @@
 <h1> Dominion </h1>
 <ul>
   <% @topics.each do |topic| %>
-  <li> <%= topic.title %>
+  <li> <%= link_to(topic.title, topic_url(topic)) %>
     <% if current_user && current_user.admin %>
     <form action="<%= topic_url(topic) %>" method="post">
 

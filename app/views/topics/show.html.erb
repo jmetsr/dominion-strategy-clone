@@ -1,0 +1,6 @@
+<h1> <%= @topic.title %> </h1>
+<% @topic.subjects.each do |subject| %>
+  <%= subject.title %>
+<% end %>
+
+<%= link_to("New Topic", new_topic_subject_url(@topic)) %>

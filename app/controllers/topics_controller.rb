@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+
   def index
     @topics = Topic.all
     render :index
@@ -19,7 +20,10 @@ class TopicsController < ApplicationController
       flash.now[:errors] = @topic.errors.full_messages
       render :new
     end
-
+  end
+  def show
+    @topic = Topic.find_by_id(params[:id])
+    render :show
   end
   def destroy
      Topic.find(params[:id]).destroy
