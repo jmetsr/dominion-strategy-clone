@@ -10,3 +10,7 @@
 
   </form>
 <% end %>
+
+<% if logged_in %>
+<%= link_to("Post Reply", new_topic_subject_reply_url(@subject.topic.id,@subject.id)) %>
+<% end %>

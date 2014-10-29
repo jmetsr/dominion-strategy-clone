@@ -1,0 +1,5 @@
+Subject: <%= Subject.find_by_id(params("subject_id")) %>
+<form action="topic_subject_replies" method="post">
+<input type="text">
+<input type="submit" value="post">
+</form>
