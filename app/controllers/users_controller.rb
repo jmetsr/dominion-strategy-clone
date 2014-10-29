@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   def index
+
     @users = User.all
+    if logged_in
+      render :index
+    else
+      redirect_to(topics_url)
+    end
   end
 
   def new
@@ -28,11 +34,34 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find_by_id(params[:id])
   end
 
   def edit
+    @user = User.find_by_id(params[:id])
+    if (@user == current_user) || (current_user.admin)
+      render :edit
+    else
+      redirect_to(topics_url)
+    end
   end
   def update
+    @user = User.find_by_id(params[:id])
+    if @user.update_attributes(user_params)
+      if current_user.admin && (params["admin"] == "true")
+        @user.update_attributes(admin: true)
+      end
+      redirect_to user_url(@user)
+    else
+      flash.now[:errors] = @user.errors.full_messages
+      render :edit
+    end
+  end
+  def destroy
+
+    @user = User.find_by_id(params[:id])
+    @user.destroy
+    redirect_to users_url
   end
   def user_params
     params.require(:user).permit(:username,:password)

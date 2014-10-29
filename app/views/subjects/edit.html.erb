@@ -1,0 +1,11 @@
+Board: <%= @subject.topic.title %>
+
+<form action="<%= topic_subject_url(@subject.topic_id,@subject.id) %>" method="post">
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="put">
+
+Change Board? <input type="text" value="<%= @subject.topic.title%>" name="subject[board_title]">
+Change Title? <input type="text" value="<%= @subject.title %>" name="subject[title]">
+Change Content? <input type="text" value="<%= @subject.body %>" name="subject[body]">
+<input type="submit" value="update topic">
+</form>

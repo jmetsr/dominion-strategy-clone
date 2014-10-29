@@ -1,0 +1,32 @@
+<h1><%= @user.username %>'s Profile Page!</h1>
+
+<% if @user.admin %>
+<%= @user.username %> is an admin
+<% else %>
+<%= @user.username %> is not an admin
+<% end %>
+
+<br>
+<% if @user.subjects.length != 0 %>
+  <%= @user.username %>'s topics
+    <% @user.subjects.each do |subject| %>
+    <%= link_to(subject.title, topic_subject_url(subject.topic_id,subject.id)) %>
+  <% end %>
+<% else%>
+    <%= @user.username %> has no topics yet
+<% end %>
+
+<% if @user == current_user %>
+  <%= link_to("edit your profile", edit_user_url(@user.id)) %>
+<% end %>
+<% if current_user.admin %>
+  <%= link_to("edit this profile", edit_user_url(@user.id)) %>
+<% end %>
+<% if @user == current_user || current_user.admin %>
+  <form action="<%= user_url(@user) %>" method="post">
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="delete profile">
+</form>
+
+<% end %>

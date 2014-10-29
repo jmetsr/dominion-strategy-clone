@@ -1,4 +1,4 @@
-Subject: <%= Subject.find_by_id(params["subject_id"]).title %>
+Topic: <%= Subject.find_by_id(params["subject_id"]).title %>
 <form action="<%= topic_subject_replies_url(params["topic_id"],params["subject_id"]) %>" method="post">
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 <input type="text" name="reply[content]" value="<%= @reply.content %>">

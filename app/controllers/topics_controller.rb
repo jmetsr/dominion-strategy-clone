@@ -30,6 +30,24 @@ class TopicsController < ApplicationController
      @topics = Topic.all
      render :index
   end
+  def edit
+    @topic = Topic.find_by_id(params[:id])
+    if current_user.admin
+      render :edit
+    else
+      redirect_to(topics_url)
+    end
+  end
+  def update
+    @topic = Topic.find_by_id(params[:id])
+    if @topic.update_attributes(topic_params)
+      redirect_to(topics_url)
+    else
+      flash.now[:errors] = @topic.errors.full_messages
+      render :edit
+    end
+
+  end
   def topic_params
     params.require(:topic).permit(:title, :admin_in)
   end

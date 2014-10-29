@@ -20,6 +20,7 @@
   <div class="navigation-bar">
   <h1>Dominion Strategy Forum</h1>
   <%= flash.now[:errors] %>
+  <%= link_to("Home", topics_url) %>
 <% if logged_in %>
 
   <%= "Hello #{current_user.username} "%>
@@ -29,9 +30,10 @@
 
     <input type="submit" value="logout">
   </form>
+  <%= link_to("members", users_url) %>
 
     <% if current_user.admin %>
-    <%= link_to('create topic', new_topic_url) %>
+    <%= link_to('create board', new_topic_url) %>
     <% end %>
 
 <% else %>

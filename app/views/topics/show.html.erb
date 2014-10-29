@@ -1,7 +1,13 @@
 <h1> <%= @topic.title %> </h1>
 <ul>
 <% @topic.subjects.each do |subject| %>
- <li> <%= link_to(subject.title, topic_subject_url(@topic,subject)) %></li>
+ <li> title: <%= link_to(subject.title, topic_subject_url(@topic,subject)) %>
+     <% if subject.user != nil%>
+       author: <%= link_to(subject.user.username, user_url(subject.user)) %>
+     <% else %>
+       The author of this Topic has deleted their profile
+     <% end%>
+ </li>
 <% end %>
 </ul>
 <% if logged_in %>

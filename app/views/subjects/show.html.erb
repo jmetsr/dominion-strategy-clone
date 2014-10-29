@@ -4,16 +4,23 @@
   <% @subject.replies.each do |reply|%>
   <ul>
     <li><%= reply.content %>
+      <% if reply.user != nil %>
+      author: <%= link_to(reply.user.username, user_url(reply.user)) %>
+      <% else %>
+      the author of this reply has deleted their profile
+      <% end %>
 
     <% if current_user && reply.user_id == current_user.id %>
       <form action="<%= topic_subject_reply_url(reply.subject.topic_id, reply.subject_id, reply) %>" method="post">
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
       <input type="hidden" name="_method" value="delete">
       <input type="submit" value="remove reply">
-</li>
-      </form>
-    <% end %>
 
+      </form>
+      <%= link_to("edit reply", edit_topic_subject_reply_url(reply.subject.topic_id, reply.subject_id, reply)) %>
+
+    <% end %>
+    </li>
   </ul>
   <% end %>
 
@@ -22,6 +29,7 @@
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" value="remove topic">
+  <%= link_to("Edit Topic", edit_topic_subject_url(params["topic_id"],params[:id]))%>
 
   </form>
 <% end %>
