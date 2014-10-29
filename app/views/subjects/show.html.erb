@@ -16,6 +16,11 @@
     margin: auto;
   }
 
+  td {
+    background: #EDEDED;
+    color: black;
+  }
+
 </style>
 
 <div class="container">
@@ -30,7 +35,7 @@
   <tr>
   <td><%= @subject.body %></td>
   <td> <% if @subject.user != nil %>
-    <%= @subject.user.username %>
+    <%= link_to(@subject.user.username, user_url(@subject.user)) %>
     <% else %>
     The author of this topic has deleted their profile
     <% end %>
