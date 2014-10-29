@@ -6,12 +6,12 @@ Change Username<input type="text" value="<%= @user.username %>" name="user[usern
   <input type="submit" value="update user">
   <% if (current_user.admin && !@user.admin) %>
     <label>
-    <input type="radio" name="admin" value="false">
+    <input type="radio" name="admin" value="false" class="radio">
     <%= @user.username %> is not an Admin
     <label>
       <br>
       <label>
-    <input type="radio" name="admin" value="true">
+    <input type="radio" name="admin" value="true" class="radio">
     Make <%= @user.username %> an Admin
   </label>
   <% end %>

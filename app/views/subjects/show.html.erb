@@ -18,12 +18,8 @@
 
 </style>
 
-
-
-
-
 <div class="container">
-<div class="board"> Board: <%= @subject.topic.title %> </div>
+<div class="board"> Board: <%= link_to(@subject.topic.title, topic_url(@subject.topic)) %> </div>
 <div class="topic"> Topic: <%= @subject.title %></div>
 </div>
 <table>
@@ -33,7 +29,12 @@
   </tr>
   <tr>
   <td><%= @subject.body %></td>
-  <td> <%= @subject.user.username %></td>
+  <td> <% if @subject.user != nil %>
+    <%= @subject.user.username %>
+    <% else %>
+    The author of this topic has deleted their profile
+    <% end %>
+  </td>
   </tr>
   <% @subject.replies.each do |reply|%>
   <tr>
@@ -48,7 +49,7 @@
       <form action="<%= topic_subject_reply_url(reply.subject.topic_id, reply.subject_id, reply) %>" method="post">
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
       <input type="hidden" name="_method" value="delete">
-    <td>  <input type="submit" value="remove reply"> </td>
+    <td>  <input type="submit" value="remove reply" class="submit"> </td>
 
       </form>
       <td><%= link_to("edit reply", edit_topic_subject_reply_url(reply.subject.topic_id, reply.subject_id, reply)) %></td>
@@ -61,7 +62,7 @@
   <form action="<%= topic_subject_url %>" method="post">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="remove topic">
+  <input type="submit" value="remove topic" class="submit">
   <%= link_to("Edit Topic", edit_topic_subject_url(params["topic_id"],params[:id]))%>
 
   </form>

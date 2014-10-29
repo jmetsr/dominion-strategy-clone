@@ -1,3 +1,4 @@
+
 <h1><%= @user.username %>'s Profile Page!</h1>
 
 <% if @user.admin %>
@@ -8,11 +9,18 @@
 
 <br>
 <% if @user.subjects.length != 0 %>
+
   <%= @user.username %>'s topics
+  <ul>
     <% @user.subjects.each do |subject| %>
-    <%= link_to(subject.title, topic_subject_url(subject.topic_id,subject.id)) %>
+<li class="topic-container">
+  <div class="topic"><%= link_to(subject.title, topic_subject_url(subject.topic_id,subject.id)) %>
+  </div>
+  </li>
+
+</ul>
   <% end %>
-<% else%>
+<% else %>
     <%= @user.username %> has no topics yet
 <% end %>
 
@@ -26,7 +34,7 @@
   <form action="<%= user_url(@user) %>" method="post">
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="delete profile">
+  <input type="submit" value="delete profile" class="submit">
 </form>
 
 <% end %>

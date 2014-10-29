@@ -11,6 +11,7 @@ class Topic < ActiveRecord::Base
       :subjects,
       :class_name => "Subject",
       primary_key: :id,
-      foreign_key: :topic_id
+      foreign_key: :topic_id,
+      dependent: :destroy
   )
 end
