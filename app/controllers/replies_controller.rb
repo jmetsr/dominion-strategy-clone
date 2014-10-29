@@ -6,4 +6,8 @@ class RepliesController < ApplicationController
   def create
 
   end
+  def reply_params
+
+  end
+
 end
