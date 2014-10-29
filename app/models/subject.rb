@@ -15,4 +15,10 @@ class Subject < ActiveRecord::Base
       primary_key: :id,
       foreign_key: :topic_id
   )
+  has_many(
+    :replies,
+    :class_name => "Reply",
+    primary_key: :id,
+    foreign_key: :subject_id
+    )
 end

@@ -1,8 +1,23 @@
 <%= @subject.topic.title %>
 <h1><%= @subject.title %></h1>
-<%= @subject.body %>
+<h3><%= @subject.body %></h3>
+  <% @subject.replies.each do |reply|%>
+  <ul>
+    <li><%= reply.content %>
 
-<% if current_user.id == @subject.user_id%>
+    <% if current_user && reply.user_id == current_user.id %>
+      <form action="<%= topic_subject_reply_url(reply.subject.topic_id, reply.subject_id, reply) %>" method="post">
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="remove reply">
+</li>
+      </form>
+    <% end %>
+
+  </ul>
+  <% end %>
+
+<% if current_user && current_user.id == @subject.user_id%>
   <form action="<%= topic_subject_url %>" method="post">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="delete">
