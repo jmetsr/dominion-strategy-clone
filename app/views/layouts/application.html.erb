@@ -10,6 +10,20 @@
   .navigation-bar{
     width: %100;
   }
+  body a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    color: inherit;
+    text-decoration: inherit;
+    background: transparent;
+    float: left;
+  }
+  .nav-link{
+    float: left;
+    padding: 20px;
+  }
   </style>
 
 
@@ -20,25 +34,36 @@
   <div class="navigation-bar">
   <h1>Dominion Strategy Forum</h1>
   <%= flash.now[:errors] %>
-  <%= link_to("Home", topics_url) %>
+  <div class="nav-link">
+  <%= link_to("HOME", topics_url) %>
+  </div>
 <% if logged_in %>
 
   <%= "Hello #{current_user.username} "%>
   <form action="<%= session_url %>" method="POST">
   <input type="hidden" name="_method" value="DELETE">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
+    <div class="nav-link">
     <input type="submit" value="logout">
+    </div>
   </form>
+  <div class="nav-link">
   <%= link_to("members", users_url) %>
+  </div>
 
     <% if current_user.admin %>
+    <div class="nav-link">
     <%= link_to('create board', new_topic_url) %>
+    </div>
     <% end %>
 
 <% else %>
+  <div class="nav-link">
   <%= link_to('REGISTER', new_user_url) %>
+  </div>
+  <div class="nav-link">
   <%= link_to('LOGIN', new_session_url) %>
+  </div>
 <% end %>
   </div>
 <%= yield %>
