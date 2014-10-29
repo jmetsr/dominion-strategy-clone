@@ -1,24 +1,39 @@
+<style>
+  .new-topic {
+    background: #D6D5DB;
+    padding: 4px;
+    display: block;
+    margin: auto;
+    width: 75px;
+  }
+  .new-topic-container {
+    width: 100%;
+    height: 75px;
+    padding: 22px;
+  }
+</style>
+
+
 <h1> <%= @topic.title %> </h1>
-<ul>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+  </tr>
 <% @topic.subjects.each do |subject| %>
- <li> title: <%= link_to(subject.title, topic_subject_url(@topic,subject)) %>
+   <tr> <td><%= link_to(subject.title, topic_subject_url(@topic,subject)) %></td>
      <% if subject.user != nil%>
-       author: <%= link_to(subject.user.username, user_url(subject.user)) %>
+       <td><%= link_to(subject.user.username, user_url(subject.user)) %></td>
      <% else %>
-       The author of this Topic has deleted their profile
-     <% end%>
- </li>
+       <td>The author of this Topic has deleted their profile</td>
+     <% end %>
+   </tr>
 <% end %>
-</ul>
+</table>
 <% if logged_in %>
-<%= link_to("New Topic", new_topic_subject_url(@topic)) %>
+<div class="new-topic-container">
+<%= link_to("New Topic", new_topic_subject_url(@topic), class: "new-topic") %>
+</div>
 <% end %>
 
-<style>
-  li{
-     list-style: none;
-    }
-   a{
-     text-decoration: none;
-    }
-  </style>

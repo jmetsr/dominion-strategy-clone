@@ -1,27 +1,60 @@
-<%= @subject.topic.title %>
-<h1><%= @subject.title %></h1>
-<h3><%= @subject.body %></h3>
+<style>
+  .container {
+    width: 100%;
+    height: 100px;
+  }
+  .board {
+    display: block;
+    font-size: 180%;
+    margin: auto;
+    width: 330px;
+    border-bottom: 2px solid blue;
+  }
+  .topic {
+    font-size: 230%;
+    width: 330px;
+    margin: auto;
+  }
+
+</style>
+
+
+
+
+
+<div class="container">
+<div class="board"> Board: <%= @subject.topic.title %> </div>
+<div class="topic"> Topic: <%= @subject.title %></div>
+</div>
+<table>
+  <tr>
+    <th>Body: </th>
+    <th>Author: </th>
+  </tr>
+  <tr>
+  <td><%= @subject.body %></td>
+  <td> <%= @subject.user.username %></td>
+  </tr>
   <% @subject.replies.each do |reply|%>
-  <ul>
-    <li><%= reply.content %>
+  <tr>
+  <td><%= reply.content %></td>
       <% if reply.user != nil %>
-      author: <%= link_to(reply.user.username, user_url(reply.user)) %>
+   <td>   <%= link_to(reply.user.username, user_url(reply.user)) %></td>
       <% else %>
-      the author of this reply has deleted their profile
+    <td>  the author of this reply has deleted their profile</td>
       <% end %>
 
     <% if current_user && reply.user_id == current_user.id %>
       <form action="<%= topic_subject_reply_url(reply.subject.topic_id, reply.subject_id, reply) %>" method="post">
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
       <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="remove reply">
+    <td>  <input type="submit" value="remove reply"> </td>
 
       </form>
-      <%= link_to("edit reply", edit_topic_subject_reply_url(reply.subject.topic_id, reply.subject_id, reply)) %>
+      <td><%= link_to("edit reply", edit_topic_subject_reply_url(reply.subject.topic_id, reply.subject_id, reply)) %></td>
 
     <% end %>
-    </li>
-  </ul>
+
   <% end %>
 
 <% if current_user && current_user.id == @subject.user_id%>
@@ -33,6 +66,7 @@
 
   </form>
 <% end %>
+</table>
 
 <% if logged_in %>
 <%= link_to("Post Reply", new_topic_subject_reply_url(@subject.topic.id,@subject.id)) %>

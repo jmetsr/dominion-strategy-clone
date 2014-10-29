@@ -1,7 +1,16 @@
-<h1> Dominion </h1>
+<style>
+  .change {
+    float: right;
+    display: block;
+    background: red;
+  }
+
+</style>
+
+<h1> Home </h1>
 <ul>
   <% @topics.each do |topic| %>
-  <li> <%= link_to(topic.title, topic_url(topic)) %>
+  <li class="topic-container"> <div class="topic"> <%= link_to(topic.title, topic_url(topic)) %></div>
     <% if current_user && current_user.admin %>
     <form action="<%= topic_url(topic) %>" method="post">
 
@@ -9,20 +18,13 @@
 
 
       <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="Remove">
+
+      <div class="change"><input type="submit" value="REMOVE"></div>
+
     </form>
-    <%= link_to("Edit Board", edit_topic_url(topic)) %>
+    <div class="change"><%= link_to("EDIT BOARD", edit_topic_url(topic)) %></div>
+
     <% end %>
   </li>
   <% end %>
 </ul>
-<style>
-
-  li{
-     list-style: none;
-     width: %100;
-    }
-
-
-
-</style>
