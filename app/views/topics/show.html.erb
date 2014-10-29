@@ -1,7 +1,18 @@
 <h1> <%= @topic.title %> </h1>
+<ul>
 <% @topic.subjects.each do |subject| %>
-  <%= subject.title %>
+ <li> <%= link_to(subject.title, topic_subject_url(@topic,subject)) %></li>
 <% end %>
+</ul>
 <% if logged_in %>
 <%= link_to("New Topic", new_topic_subject_url(@topic)) %>
 <% end %>
+
+<style>
+  li{
+     list-style: none;
+    }
+   a{
+     text-decoration: none;
+    }
+  </style>

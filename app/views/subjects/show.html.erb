@@ -1,6 +1,7 @@
-<%= @subject.title %>
-<%= @subject.body %>
 <%= @subject.topic.title %>
+<h1><%= @subject.title %></h1>
+<%= @subject.body %>
+
 <% if current_user.id == @subject.user_id%>
   <form action="<%= topic_subject_url %>" method="post">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
