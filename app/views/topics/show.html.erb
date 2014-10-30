@@ -1,39 +1,79 @@
 <style>
-  .new-topic {
-    background: #D6D5DB;
-    padding: 4px;
-    display: block;
-    margin: auto;
-    width: 75px;
-  }
-  .new-topic-container {
+  .container {
     width: 100%;
-    height: 75px;
-    padding: 22px;
+    height: 100px;
   }
+  .board {
+    display: block;
+    font-size: 180%;
+    margin: auto;
+    width: 330px;
+    border-bottom: 2px solid blue;
+  }
+  .topic {
+    font-size: 230%;
+    width: 330px;
+    margin: auto;
+  }
+
+  td {
+    background: #EDEDED;
+    color: black;
+  }
+
 </style>
 
-
-<h1> <%= @topic.title %> </h1>
-
+<div class="container">
+<div class="board"> Board: <%= link_to(@topic.board.title, board_url(@topic.board)) %> </div><br>
+<div class="topic"> Topic: <%= @topic.title %></div>
+</div>
 <table>
   <tr>
-    <th>Title</th>
-    <th>Author</th>
+    <th>Body: </th>
+    <th>Author: </th>
   </tr>
-<% @topic.subjects.each do |subject| %>
-   <tr> <td><%= link_to(subject.title, topic_subject_url(@topic,subject)) %></td>
-     <% if subject.user != nil%>
-       <td><%= link_to(subject.user.username, user_url(subject.user)) %></td>
-     <% else %>
-       <td>The author of this Topic has deleted their profile</td>
-     <% end %>
-   </tr>
+  <tr>
+  <td><%= @topic.body %></td>
+  <td> <% if @topic.user != nil %>
+    <%= link_to(@topic.user.username, user_url(@topic.user)) %>
+    <% else %>
+    The author of this topic has deleted their profile
+    <% end %>
+  </td>
+  </tr>
+  <% @topic.replies.each do |reply|%>
+  <tr>
+  <td><%= reply.content %></td>
+      <% if reply.user != nil %>
+   <td>   <%= link_to(reply.user.username, user_url(reply.user)) %></td>
+      <% else %>
+    <td>  the author of this reply has deleted their profile</td>
+      <% end %>
+
+    <% if current_user && reply.user_id == current_user.id %>
+      <form action="<%= board_topic_reply_url(reply.topic.board_id, reply.topic_id, reply) %>" method="post">
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="delete">
+    <td>  <input type="submit" value="remove reply" class="submit"> </td>
+
+      </form>
+      <td><%= link_to("edit reply", edit_board_topic_reply_url(reply.topic.board_id, reply.topic_id, reply)) %></td>
+
+    <% end %>
+
+  <% end %>
+
+<% if current_user && current_user.id == @topic.user_id%>
+  <form action="<%= board_topic_url %>" method="post">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="remove topic" class="submit">
+  <%= link_to("Edit Topic", edit_board_topic_url(params["board_id"],params[:id]))%>
+
+  </form>
 <% end %>
 </table>
-<% if logged_in %>
-<div class="new-topic-container">
-<%= link_to("New Topic", new_topic_subject_url(@topic), class: "new-topic") %>
-</div>
-<% end %>
 
+<% if logged_in %>
+<%= link_to("Post Reply", new_board_topic_reply_url(@topic.board.id,@topic.id)) %>
+<% end %>

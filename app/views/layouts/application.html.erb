@@ -94,7 +94,7 @@
 
 <ul class="nav-bar">
   <li class="nav home">
-<%= link_to("HOME", topics_url) %>
+<%= link_to("HOME", boards_url) %>
   </li>
 <% if logged_in %>
   <form action="<%= session_url %>" method="POST">
@@ -110,10 +110,14 @@
   <%= link_to("MEMBERS", users_url) %>
   </li>
 
+  <li class="nav">
+    <%= link_to("PROFILE", user_url(current_user))%>
+  </li>
+
   <% if current_user.admin %>
 
   <li class="nav">
-    <%= link_to('CREATE BOARD', new_topic_url) %>
+    <%= link_to('CREATE BOARD', new_board_url) %>
   </li>
 
   <% end %>

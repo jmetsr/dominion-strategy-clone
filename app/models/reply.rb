@@ -1,6 +1,6 @@
 class Reply < ActiveRecord::Base
   validates :user_id, presence: true
-  validates :subject_id, presence: true
+  validates :topic_id, presence: true
   validates :content, presence: true
 
   belongs_to(
@@ -10,10 +10,10 @@ class Reply < ActiveRecord::Base
       foreign_key: :user_id
   )
   belongs_to(
-      :subject,
-      :class_name => "Subject",
+      :topic,
+      :class_name => "Topic",
       primary_key: :id,
-      foreign_key: :subject_id
+      foreign_key: :topic_id
   )
 
 end

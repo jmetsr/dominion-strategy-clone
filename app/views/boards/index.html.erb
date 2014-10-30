@@ -9,10 +9,10 @@
 
 <h1> Home </h1>
 <ul>
-  <% @topics.each do |topic| %>
-  <li class="topic-container"> <div class="topic"> <%= link_to(topic.title, topic_url(topic)) %></div>
+  <% @boards.each do |board| %>
+  <li class="topic-container"> <div class="topic"> <%= link_to(board.title, board_url(board)) %></div>
     <% if current_user && current_user.admin %>
-    <form action="<%= topic_url(topic) %>" method="post">
+    <form action="<%= board_url(board) %>" method="post">
 
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
@@ -22,7 +22,7 @@
       <div class="change"><input type="submit" value="REMOVE"></div>
 
     </form>
-    <div class="change"><%= link_to("EDIT BOARD", edit_topic_url(topic)) %></div>
+    <div class="change"><%= link_to("EDIT BOARD", edit_board_url(board)) %></div>
 
     <% end %>
   </li>

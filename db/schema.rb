@@ -11,33 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029003723) do
+ActiveRecord::Schema.define(version: 20141030160635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "boards", force: true do |t|
+    t.integer  "admin_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
   create_table "replies", force: true do |t|
-    t.integer  "subject_id", null: false
+    t.integer  "topic_id",   null: false
     t.integer  "user_id",    null: false
     t.text     "content",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "subjects", force: true do |t|
+  create_table "topics", force: true do |t|
     t.integer  "user_id",    null: false
     t.string   "title",      null: false
     t.text     "body",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "topic_id"
-  end
-
-  create_table "topics", force: true do |t|
-    t.integer  "admin_in",   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "title"
+    t.integer  "board_id"
   end
 
   create_table "users", force: true do |t|

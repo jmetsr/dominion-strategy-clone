@@ -1,28 +1,24 @@
 class UsersController < ApplicationController
-  def index
 
+  before_filter :reguire_login, except: [:new, :create]
+  before_filter :require_logout, only: [:new, :create]
+
+  def index
     @users = User.all
-    if logged_in
-      render :index
-    else
-      redirect_to(topics_url)
-    end
+    render :index
   end
 
   def new
-    if logged_in
-      redirect_to(topics_url)
-    else
-      @user = User.new
-      render :new
-    end
+    @user = User.new
+    render :new
   end
+
   def create
     @user = User.new(user_params)
     @user.admin = false
     if @user.save
       login(@user)
-      redirect_to(topics_url)
+      redirect_to(boards_url)
     else
       if @user.password.length == 0
         flash.now[:errors] = "Password field empty"
@@ -42,9 +38,10 @@ class UsersController < ApplicationController
     if (@user == current_user) || (current_user.admin)
       render :edit
     else
-      redirect_to(topics_url)
+      redirect_to(boards_url)
     end
   end
+
   def update
     @user = User.find_by_id(params[:id])
     if @user.update_attributes(user_params)
@@ -57,12 +54,13 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-  def destroy
 
+  def destroy
     @user = User.find_by_id(params[:id])
     @user.destroy
-    redirect_to users_url
+    redirect_to boards_url
   end
+
   def user_params
     params.require(:user).permit(:username,:password)
   end

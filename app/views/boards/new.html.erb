@@ -1,0 +1,11 @@
+<h1> Start New Board </h1>
+
+<form action="<%= boards_url %>" method="post">
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+<label> Title
+<input type ="text" name="board[title]">
+</label>
+<input type ="hidden" value="<%= current_user.id %>" name="board[admin_id]">
+<input type="submit" value="Create Board">
+
+</form>

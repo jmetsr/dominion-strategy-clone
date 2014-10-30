@@ -9,16 +9,22 @@ class User < ActiveRecord::Base
       user.set_session_token
   end
   has_many(
-      :topics,
-      :class_name => "User",
+      :boards,
+      :class_name => "Board",
       primary_key: :id,
-      foreign_key: :admin_in
+      foreign_key: :admin_id
     )
     has_many(
-        :subjects,
-        :class_name => "Subject",
+        :topics,
+        :class_name => "Topic",
         primary_key: :id,
         foreign_key: :user_id
+    )
+    has_many(
+      :replies,
+      :class_name => "Reply",
+      primary_key: :id,
+      foreign_key: :user_id
     )
 
   def set_session_token

@@ -1,17 +1,24 @@
 class Topic < ActiveRecord::Base
+  validates :user_id, presence: true
   validates :title, presence: true
-  validates :admin_in, presence: true
+  validates :body, presence: true
+
   belongs_to(
       :user,
       :class_name => "User",
       primary_key: :id,
-      foreign_key: :admin_in
+      foreign_key: :user_id
+  )
+  belongs_to(
+      :board,
+      :class_name => "Board",
+      primary_key: :id,
+      foreign_key: :board_id
   )
   has_many(
-      :subjects,
-      :class_name => "Subject",
-      primary_key: :id,
-      foreign_key: :topic_id,
-      dependent: :destroy
-  )
+    :replies,
+    :class_name => "Reply",
+    primary_key: :id,
+    foreign_key: :topic_id
+    )
 end

@@ -1,56 +1,63 @@
 class TopicsController < ApplicationController
 
+  before_filter :reguire_login, except: [:index, :show]
+
   def index
-    @topics = Topic.all
-    render :index
   end
+
   def new
-    if !logged_in || (current_user.admin == false)
-      redirect_to(topics_url)
-    else
-      @topic = Topic.new
-      render :new
-    end
+    @topic = Topic.new
+    render :new
   end
+
   def create
     @topic = Topic.new(topic_params)
     if @topic.save
-      redirect_to(topics_url)
+      redirect_to(board_topic_url(@topic.board_id,@topic.id))
     else
       flash.now[:errors] = @topic.errors.full_messages
       render :new
     end
   end
+
   def show
     @topic = Topic.find_by_id(params[:id])
-    render :show
   end
+
   def destroy
-     Topic.find(params[:id]).destroy
-     @topics = Topic.all
-     render :index
+    @topic = Topic.find_by_id(params[:id])
+    @board = @topic.board
+    @topic.destroy
+    redirect_to(board_url(@board))
   end
+
   def edit
     @topic = Topic.find_by_id(params[:id])
-    if current_user.admin
+    if current_user.id == @topic.user_id
       render :edit
     else
-      redirect_to(topics_url)
+      redirect_to boards_url
     end
   end
+
   def update
     @topic = Topic.find_by_id(params[:id])
     if @topic.update_attributes(topic_params)
-      redirect_to(topics_url)
+      board = Board.find_by_title(params["topic"]["board_title"])
+      if board
+        @subject.update_attributes(board_id: board.id)
+        redirect_to board_topic_url(@topic.board_id, @topic.id)
+      else
+        flash.now[:errors] = "Thats not a valid board"
+        render :edit
+      end
     else
       flash.now[:errors] = @topic.errors.full_messages
       render :edit
     end
-
   end
+
   def topic_params
-    params.require(:topic).permit(:title, :admin_in)
+    params.require(:topic).permit(:title,:body,:user_id,:board_id)
   end
-
-
 end
