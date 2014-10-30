@@ -15,12 +15,10 @@
     width: 330px;
     margin: auto;
   }
-
   td {
     background: #EDEDED;
     color: black;
   }
-
 </style>
 
 <div class="container">
@@ -50,30 +48,36 @@
     <td>  the author of this reply has deleted their profile</td>
       <% end %>
 
-    <% if current_user && reply.user_id == current_user.id %>
-      <form action="<%= board_topic_reply_url(reply.topic.board_id, reply.topic_id, reply) %>" method="post">
+      <% if current_user && reply.user_id == current_user.id %>
+      <form action="<%= reply_url(reply) %>" method="post">
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
       <input type="hidden" name="_method" value="delete">
     <td>  <input type="submit" value="remove reply" class="submit"> </td>
 
       </form>
-      <td><%= link_to("edit reply", edit_board_topic_reply_url(reply.topic.board_id, reply.topic_id, reply)) %></td>
+      <td><%= link_to("edit reply", edit_reply_url(reply)) %></td>
 
-    <% end %>
-
+      <% end %>
   <% end %>
 
-<% if current_user && current_user.id == @topic.user_id%>
-  <form action="<%= board_topic_url %>" method="post">
+
+
+    <% if current_user && current_user.id == @topic.user_id %>
+  <form action="<%= topic_url(@topic) %>" method="post">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" value="remove topic" class="submit">
-  <%= link_to("Edit Topic", edit_board_topic_url(params["board_id"],params[:id]))%>
-
   </form>
-<% end %>
+
+
+  <%= link_to("Edit Topic", edit_topic_url(params[:id]))%>
+   <% end %>
+
+
+
 </table>
 
+
 <% if logged_in %>
-<%= link_to("Post Reply", new_board_topic_reply_url(@topic.board.id,@topic.id)) %>
+  <%= link_to("Post Reply", new_topic_reply_url(@topic.id)) %>
 <% end %>

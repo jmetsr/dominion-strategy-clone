@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :reguire_login, except: [:new, :create]
+  before_filter :reguire_login, except: [:new, :create, :show]
   before_filter :require_logout, only: [:new, :create]
 
   def index
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by_id(params[:id])
     if @user.update_attributes(user_params)
-      if current_user.admin && (params["admin"] == "true")
+      if current_user.admin && (params[:admin] == "true")
         @user.update_attributes(admin: true)
       end
       redirect_to user_url(@user)

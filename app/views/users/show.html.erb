@@ -14,7 +14,7 @@
   <ul>
     <% @user.topics.each do |topic| %>
 <li class="topic-container">
-  <div class="topic"><%= link_to(topic.title, board_topic_url(topic.board_id,topic.id)) %>
+  <div class="topic"><%= link_to(topic.title, topic_url(topic)) %>
   </div>
   </li>
 

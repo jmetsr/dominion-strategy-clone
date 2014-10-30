@@ -10,7 +10,7 @@ class RepliesController < ApplicationController
   def create
     @reply = Reply.new(content: params["reply"]["content"], user_id: current_user.id, topic_id: params[:topic_id])
     if @reply.save
-      redirect_to board_topic_url(params["board_id"],params["topic_id"])
+      redirect_to topic_url(params[:topic_id])
     else
       flash.now[:errors] = @reply.errors.full_messages
       render :new
@@ -19,8 +19,9 @@ class RepliesController < ApplicationController
 
   def destroy
     @reply = Reply.find_by_id(params[:id])
+    topic = @reply.topic
     @reply.destroy
-    redirect_to board_topic_url(params["board_id"],params["topic_id"])
+    redirect_to topic_url(topic)
   end
 
   def show
@@ -37,9 +38,9 @@ class RepliesController < ApplicationController
 
   def update
     @reply = Reply.find_by_id(params[:id])
-    @reply.update_attributes(content: params["reply"]["content"])
+    @reply.update_attributes(content: params[:reply][:content])
     if @reply.save
-      redirect_to board_topic_url(params["board_id"],params["topic_id"])
+      redirect_to topic_url(@reply.topic)
     else
       flash.now[:errors] = @reply.errors.full_messages
       render :edit

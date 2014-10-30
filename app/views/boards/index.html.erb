@@ -4,7 +4,6 @@
     display: block;
     background: red;
   }
-
 </style>
 
 <h1> Home </h1>
@@ -13,16 +12,15 @@
   <li class="topic-container"> <div class="topic"> <%= link_to(board.title, board_url(board)) %></div>
     <% if current_user && current_user.admin %>
     <form action="<%= board_url(board) %>" method="post">
-
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-
-      <input type="hidden" name="_method" value="delete">
-
-      <div class="change"><input type="submit" value="REMOVE"></div>
-
+        <input type="hidden" name="_method" value="delete">
+        <div class="change">
+          <input type="submit" value="REMOVE">
+        </div>
     </form>
-    <div class="change"><%= link_to("EDIT BOARD", edit_board_url(board)) %></div>
+    <div class="change">
+      <%= link_to("EDIT BOARD", edit_board_url(board)) %>
+    </div>
 
     <% end %>
   </li>

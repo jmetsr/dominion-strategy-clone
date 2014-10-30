@@ -1,7 +1,7 @@
-Topic: <%= Topic.find_by_id(params["topic_id"]).title %>
-<form action="<%= board_topic_replies_url(params["board_id"],params["topic_id"]) %>" method="post">
-  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-<input type="text" name="reply[content]" value="<%= @reply.content %>">
+Topic: <%= Topic.find_by_id(params[:topic_id]).title %>
 
-<input type="submit" value="post">
+<form action="<%= topic_replies_url(params[:topic_id]) %>" method="post">
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+  <input type="text" name="reply[content]" value="<%= @reply.content %>">
+  <input type="submit" value="post">
 </form>

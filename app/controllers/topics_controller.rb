@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     if @topic.save
-      redirect_to(board_topic_url(@topic.board_id,@topic.id))
+      redirect_to(topic_url(@topic))
     else
       flash.now[:errors] = @topic.errors.full_messages
       render :new
@@ -43,10 +43,10 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find_by_id(params[:id])
     if @topic.update_attributes(topic_params)
-      board = Board.find_by_title(params["topic"]["board_title"])
+      board = Board.find_by_title(params[:topic][:board_title])
       if board
-        @subject.update_attributes(board_id: board.id)
-        redirect_to board_topic_url(@topic.board_id, @topic.id)
+        @topic.update_attributes(board_id: board.id)
+        redirect_to topic_url(@topic)
       else
         flash.now[:errors] = "Thats not a valid board"
         render :edit
