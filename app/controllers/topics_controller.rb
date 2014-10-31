@@ -21,18 +21,18 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find_by_id(params[:id])
+    @topic = Topic.find(params[:id])
   end
 
   def destroy
-    @topic = Topic.find_by_id(params[:id])
+    @topic = Topic.find(params[:id])
     @board = @topic.board
     @topic.destroy
     redirect_to(board_url(@board))
   end
 
   def edit
-    @topic = Topic.find_by_id(params[:id])
+    @topic = Topic.find(params[:id])
     if current_user.id == @topic.user_id
       render :edit
     else
@@ -41,16 +41,9 @@ class TopicsController < ApplicationController
   end
 
   def update
-    @topic = Topic.find_by_id(params[:id])
+    @topic = Topic.find(params[:id])
     if @topic.update_attributes(topic_params)
-      board = Board.find_by_title(params[:topic][:board_title])
-      if board
-        @topic.update_attributes(board_id: board.id)
-        redirect_to topic_url(@topic)
-      else
-        flash.now[:errors] = "Thats not a valid board"
-        render :edit
-      end
+      redirect_to topic_url(@topic)
     else
       flash.now[:errors] = @topic.errors.full_messages
       render :edit

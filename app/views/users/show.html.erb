@@ -1,3 +1,17 @@
+<style>
+.topic {
+  width: 500px;
+}
+
+.topic-container {
+  height: 75px;
+}
+</style>
+
+
+
+
+
 
 <h1><%= @user.username %>'s Profile Page!</h1>
 
@@ -6,6 +20,7 @@
 <% else %>
 <%= @user.username %> is not an admin
 <% end %>
+<%= "#{@user.username} has posted #{@user.topics.count} topics, and #{@user.replies.count} replies" %>
 
 <br>
 <% if @user.topics.length != 0 %>
@@ -27,7 +42,7 @@
 <% if @user == current_user %>
   <%= link_to("edit your profile", edit_user_url(@user.id)) %>
 <% end %>
-<% if current_user && current_user.admin %>
+<% if (current_user && current_user.admin) && !@user == current_user  %>
   <%= link_to("edit this profile", edit_user_url(@user.id)) %>
 <% end %>
 <% if current_user && (@user == current_user || current_user.admin) %>

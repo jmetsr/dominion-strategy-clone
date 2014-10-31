@@ -24,7 +24,7 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @board = Board.find_by_id(params[:id])
+    @board = Board.find(params[:id])
     render :show
   end
 
@@ -35,12 +35,12 @@ class BoardsController < ApplicationController
   end
 
   def edit
-    @board = Board.find_by_id(params[:id])
+    @board = Board.find(params[:id])
     render :edit
   end
 
   def update
-    @board = Board.find_by_id(params[:id])
+    @board = Board.find(params[:id])
     if @board.update_attributes(board_params)
       redirect_to(boards_url)
     else

@@ -1,7 +1,7 @@
 <style>
   .container {
     width: 100%;
-    height: 100px;
+    padding: 10px;
   }
   .board {
     display: block;
@@ -12,70 +12,138 @@
   }
   .topic {
     font-size: 230%;
-    width: 330px;
+    width: 100%;
     margin: auto;
   }
-  td {
-    background: #EDEDED;
-    color: black;
+  .reply-data {
+    width: 100%;
   }
+  .reply-content {
+    overflow: scroll;
+    display: block;
+    padding: 2px;
+    width: 700px;
+    float: left;
+    height: 100px;
+
+  }
+
+  .parent {
+    width: 100%;
+  }
+  .author {
+    float: left;
+    width: 100px;
+  }
+  .reply {
+    width: 100%;
+  }
+  .reply-links: {
+    display: block;
+    background: solid blue;
+    align: right;
+
+  }
+  .group:after {
+    content: "";
+    clear: both;
+  }
+
+
 </style>
 
-<div class="container">
+<div class="container group">
 <div class="board"> Board: <%= link_to(@topic.board.title, board_url(@topic.board)) %> </div><br>
 <div class="topic"> Topic: <%= @topic.title %></div>
 </div>
-<table>
-  <tr>
-    <th>Body: </th>
-    <th>Author: </th>
-  </tr>
-  <tr>
-  <td><%= @topic.body %></td>
-  <td> <% if @topic.user != nil %>
-    <%= link_to(@topic.user.username, user_url(@topic.user)) %>
-    <% else %>
-    The author of this topic has deleted their profile
-    <% end %>
-  </td>
-  </tr>
-  <% @topic.replies.each do |reply|%>
-  <tr>
-  <td><%= reply.content %></td>
-      <% if reply.user != nil %>
-   <td>   <%= link_to(reply.user.username, user_url(reply.user)) %></td>
-      <% else %>
-    <td>  the author of this reply has deleted their profile</td>
-      <% end %>
 
-      <% if current_user && reply.user_id == current_user.id %>
+
+<br>
+
+<ul class="parent">
+ <li class="reply">
+   <ul class="reply-data">
+
+
+
+
+       <% if @topic.user != nil %>
+       <li class="author">Author:
+         <%= link_to(@topic.user.username, user_url(@topic.user)) %>
+       </li>
+      <% else %>
+      <li class="author">
+        The author of this topic has deleted their profile
+      </li>
+      <% end %>
+      <div class="reply-content">
+        <li class="content">
+           <%= @topic.body %>
+        </li>
+      </div>
+      <% if current_user && @topic.user_id == current_user.id %>
+        <div class="reply-links">
+          <form action="<%= topic_url(@topic) %>" method="post">
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <li>
+                <input type="submit" value="remove topic" class="submit">
+            </li>
+          </form>
+            <li>
+              <%= link_to("edit topic", edit_topic_url(@topic)) %>
+            </li>
+        </div>
+
+      <% end %>
+    </ul>
+  </li>
+
+
+
+
+
+
+
+<% @topic.replies.each do |reply|%>
+<li class="reply">
+<ul class="reply-data">
+  <% if reply.user != nil %>
+     <li class="author">Author: <%= link_to(reply.user.username, user_url(reply.user)) %></li>
+  <% else %>
+     <li class="author">the author of this reply has deleted their profile</li>
+  <% end %>
+   <div class="reply-content">
+     <li class="content">
+       <%= reply.content %>
+     </li>
+   </div>
+
+
+    <% if current_user && reply.user_id == current_user.id %>
+
+
+    <div class="reply-links">
       <form action="<%= reply_url(reply) %>" method="post">
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="_method" value="delete">
-    <td>  <input type="submit" value="remove reply" class="submit"> </td>
-
+        <input type="hidden" name="_method" value="delete">
+        <li><input type="submit" value="remove reply" class="submit"></li>
       </form>
-      <td><%= link_to("edit reply", edit_reply_url(reply)) %></td>
+      <li><%= link_to("edit reply", edit_reply_url(reply)) %></li>
+    </div>
 
-      <% end %>
   <% end %>
+  </ul>
+</li>
+<% end %>
+</ul>
 
 
 
-    <% if current_user && current_user.id == @topic.user_id %>
-  <form action="<%= topic_url(@topic) %>" method="post">
-    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="remove topic" class="submit">
-  </form>
-
-
-  <%= link_to("Edit Topic", edit_topic_url(params[:id]))%>
-   <% end %>
 
 
 
-</table>
+
 
 
 <% if logged_in %>

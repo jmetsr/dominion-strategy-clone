@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_id(params[:id])
+    @user = User.find(params[:id])
   end
 
   def edit
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by_id(params[:id])
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       if current_user.admin && (params[:admin] == "true")
         @user.update_attributes(admin: true)
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find_by_id(params[:id])
+    @user = User.find(params[:id])
     @user.destroy
     redirect_to boards_url
   end

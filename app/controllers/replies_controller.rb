@@ -8,7 +8,7 @@ class RepliesController < ApplicationController
   end
 
   def create
-    @reply = Reply.new(content: params["reply"]["content"], user_id: current_user.id, topic_id: params[:topic_id])
+    @reply = current_user.replies.new(content: params[:reply][:content], topic_id: params[:topic_id])
     if @reply.save
       redirect_to topic_url(params[:topic_id])
     else
@@ -18,7 +18,7 @@ class RepliesController < ApplicationController
   end
 
   def destroy
-    @reply = Reply.find_by_id(params[:id])
+    @reply = Reply.find(params[:id])
     topic = @reply.topic
     @reply.destroy
     redirect_to topic_url(topic)
@@ -28,7 +28,7 @@ class RepliesController < ApplicationController
   end
 
   def edit
-    @reply = Reply.find_by_id(params[:id])
+    @reply = Reply.find(params[:id])
     if logged_in && current_user.id == @reply.user_id
       render :edit
     else
@@ -37,7 +37,7 @@ class RepliesController < ApplicationController
   end
 
   def update
-    @reply = Reply.find_by_id(params[:id])
+    @reply = Reply.find(params[:id])
     @reply.update_attributes(content: params[:reply][:content])
     if @reply.save
       redirect_to topic_url(@reply.topic)
