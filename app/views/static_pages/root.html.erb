@@ -1,0 +1,14 @@
+<div class="backdrop">
+  <div id="main"></div>
+</div>
+
+<script>
+  DominionStrategyClone.currentUserId = <%= current_user.try(:id) || "null" %>;
+  DominionStrategyClone.loggedIn = <%= logged_in %>
+  DominionStrategyClone.isAdmin = <%= current_user.try(:admin) || "false" %>
+
+  $(document).ready(function(){
+    DominionStrategyClone.initialize();
+  });
+
+</script>
