@@ -8,6 +8,10 @@ DominionStrategyClone.Views.BoardsIndex = Backbone.View.extend({
     })
     this.$el.html(renderedContent)
     return this;
+  },
+  initialize: function(){
+    this.listenTo(this.collection, 'sync', this.render)
+    this.collection.fetch();
   }
 
 
