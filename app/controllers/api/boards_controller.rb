@@ -16,9 +16,9 @@ class Api::BoardsController < ApplicationController
   def create
     @board = Board.new(board_params)
     if @board.save
-      render :json => "board created"
+      render :json => @board
     else
-      render :json => @board.errors.full_messages
+      render :json => @board.errors.full_messages, status: 422
     end
   end
 
@@ -31,7 +31,7 @@ class Api::BoardsController < ApplicationController
   def update
     @board = Board.find(params[:id])
     if @board.update_attributes(board_params)
-      render :json => "success"
+      render :json => @board
     else
       render :json => @board.errors.full_messages
     end
