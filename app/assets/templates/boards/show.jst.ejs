@@ -1,2 +1,50 @@
-hndhmyfhumfuymj
-<%= board.get("title") %>
+<style>
+  .new-topic {
+    background: #D6D5DB;
+    padding: 4px;
+    display: block;
+    margin: auto;
+    width: 75px;
+  }
+  .new-topic-container {
+    width: 100%;
+    height: 75px;
+    padding: 22px;
+  }
+</style>
+
+<h1> <%= board.get("title") %> </h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+  </tr>
+<% board.topics().each(function(topic) { %>
+   <tr>
+    <td>
+      <a href="#/topics/<%= topic.id %>">
+        <%= topic.get("title") %>
+      </a>
+    </td>
+    <% if (typeof topic.get("user") !== "undefined") { %>
+      <td>
+        <a href="users/<%= topic.get("user").id %>">
+          <%= topic.get("user") %>
+        </a>
+      </td>
+    <% } else { %>
+       <td>The author of this Topic has deleted their profile</td>
+     <% } %>
+   </tr>
+<% }) %>
+</table>
+
+
+<% if (DominionStrategyClone.loggedIn) { %>
+  <div class="new-topic-container">
+    <a href="#/boards/<%= board.id %>/topics/new" class="new-topic">
+      New Topic
+    </a>
+  </div>
+<% } %>

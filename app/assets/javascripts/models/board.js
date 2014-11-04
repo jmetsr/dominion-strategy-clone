@@ -7,14 +7,14 @@ DominionStrategyClone.Models.Board = Backbone.Model.extend({
     }
 
     return this._topics
+  },
+
+
+  parse: function(response){
+   if (response.topics){
+      this.topics().set(response.topics, { parse: true });
+      delete response.topics;
+    }
+    return response;
   }
-
-
- // parse: function(response){
-//    if (response.topics){
-  //    this.topics().set(response.topics, { parse: true });
-  //    delete response.topics;
- //   }
- //   return response;
-//  }
 })
