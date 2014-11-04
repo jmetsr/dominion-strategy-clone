@@ -14,6 +14,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     var indexView = new DominionStrategyClone.Views.BoardsIndex({
       collection: DominionStrategyClone.Collections.boards
     })
+    DominionStrategyClone.Collections.boards.fetch();
     this._swapView(indexView);
   },
 
@@ -31,6 +32,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
       var newView = new DominionStrategyClone.Views.BoardNew;
       this._swapView(newView);
     } else {
+      $('#errors').html("You need to be an admin to access this section")
       var indexView = new DominionStrategyClone.Views.BoardsIndex({
         collection: DominionStrategyClone.Collections.boards
       })

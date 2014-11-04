@@ -9,7 +9,7 @@
   <style>
 
 
-  li, a, input:not(.radio), h1 {
+  li, a, input:not(.radio), h1, button {
     margin: 0;
     padding: 0;
     border: 0;
@@ -43,11 +43,11 @@
     padding: 3px;
   }
 
-  input:not(.submit) {
+  input:not(.submit), button {
     border: 1px solid black;
   }
 
-  input:not(.radio), a {
+  input:not(.radio), a, button {
     font-weight: bold;
     padding: 8px;
     border: 3px solid black;
@@ -78,7 +78,9 @@
 <body>
 
 <h1>Dominion Strategy Forum</h1>
-<%= flash.now[:errors] %>
+<div id="errors">
+  <%= flash.now[:errors] %>
+</div>
 
 
 

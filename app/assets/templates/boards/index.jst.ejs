@@ -18,7 +18,9 @@
 
     <% if (DominionStrategyClone.isAdmin) { %>
       <div class="change">
-        <input type="submit" value="REMOVE">
+          <button id='<%= board.id %> '>
+             REMOVE BOARD
+          </button>
       </div>
       <div class="change">
         <a href="#/boards/<%= board.id %>/edit">
