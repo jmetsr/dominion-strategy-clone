@@ -33,7 +33,7 @@ class Api::BoardsController < ApplicationController
     if @board.update_attributes(board_params)
       render :json => @board
     else
-      render :json => @board.errors.full_messages
+      render :json => @board.errors.full_messages, status: 422
     end
   end
 

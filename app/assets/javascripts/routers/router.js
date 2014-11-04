@@ -7,14 +7,13 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     '': 'boardsIndex',
     'boards/new': 'boardNew',
     'boards/:id': 'boardShow',
-    'boards/:id/edit': 'editBoard'
+    'boards/:id/edit': 'boardEdit'
   },
 
   boardsIndex: function(){
     var indexView = new DominionStrategyClone.Views.BoardsIndex({
       collection: DominionStrategyClone.Collections.boards
-    });
-    console.log("boards Index")
+    })
     this._swapView(indexView);
   },
 
@@ -39,9 +38,18 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     }
   },
 
-  boardEdit: function(){
+  boardEdit: function(id){
+    var board = DominionStrategyClone.Collections.boards.getOrFetch(id);
     if (DominionStrategyClone.isAdmin) {
-      
+      var editView = new DominionStrategyClone.Views.BoardEdit({
+        model: board
+      });
+      this._swapView(editView);
+    } else {
+      var indexView = new DominionStrategyClone.Views.BoardsIndex({
+        collection: DominionStrategyClone.Collections.boards
+      })
+      this._swapView(indexView);
     }
   },
 
