@@ -4,7 +4,8 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     console.log('hello from the router')
   },
   routes: {
-    '':'boardsIndex'
+    '': 'boardsIndex',
+    'boards/:id': 'boardShow'
   },
 
   boardsIndex: function(){
@@ -14,6 +15,15 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     });
     console.log("boards Index")
     this._swapView(indexView);
+  },
+
+  boardShow: function(id){
+    var board = DominionStrategyClone.Collections.boards.getOrFetch(id);
+    var showView = new DominionStrategyClone.Views.BoardShow({
+      model: board
+    });
+    this._swapView(showView)
+
   },
 
   _swapView: function(view){
