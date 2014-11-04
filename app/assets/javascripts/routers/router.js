@@ -7,7 +7,8 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     '': 'boardsIndex',
     'boards/new': 'boardNew',
     'boards/:id': 'boardShow',
-    'boards/:id/edit': 'boardEdit'
+    'boards/:id/edit': 'boardEdit',
+    'topics/:id':'topicShow'
   },
 
   boardsIndex: function(){
@@ -53,6 +54,15 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
       })
       this._swapView(indexView);
     }
+  },
+
+  topicShow: function(id){
+    var topic = DominionStrategyClone.Collections.topics.getOrFetch(id);
+    var showView = new DominionStrategyClone.Views.TopicShow({
+      model: topic
+    });
+    this._swapView(showView)
+
   },
 
   _swapView: function(view){
