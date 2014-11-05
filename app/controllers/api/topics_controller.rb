@@ -3,6 +3,10 @@ class Api::TopicsController < ApplicationController
   before_filter :reguire_login, except: [:index, :show]
   before_filter :require_admin, except: [:index, :show]
 
+  def index
+    @topics = Topic.all
+    render :json => @topics
+  end
   def show
     @topic = Topic.find(params[:id])
     render :show
