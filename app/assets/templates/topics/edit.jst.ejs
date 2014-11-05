@@ -1,0 +1,6 @@
+Board: <%= topic.board().get('title') %><br>
+Change Title? <input type="text" value="<%= topic.get('title') %>" id="title"><br><br>
+Change Content? <br><textarea rows="12" cols="80" id="body"><%= topic.get('body') %></textarea><br>
+<form>
+<input type="submit" value="update topic">
+</form>

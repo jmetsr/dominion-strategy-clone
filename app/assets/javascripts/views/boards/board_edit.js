@@ -20,12 +20,8 @@ DominionStrategyClone.Views.BoardEdit = Backbone.View.extend({
   editBoard: function(){
     event.preventDefault();
     identifier = this.$("#title").val();
-    board = new DominionStrategyClone.Models.Board;
     this.model.save({title: identifier, id: this.model.get("id")},{
-      success: function(){
-        console.log("success")
-        Backbone.history.navigate("#", {trigger: true});
-      },
+      success: function(){},
       error: function(){
         alert("That's not a valid board title, try again");
       }

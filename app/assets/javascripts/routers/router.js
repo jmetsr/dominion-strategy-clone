@@ -9,6 +9,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     'boards/:id': 'boardShow',
     'boards/:id/edit': 'boardEdit',
     'topics/:id': 'topicShow',
+    'topics/:id/edit': 'topicEdit',
     'boards/:id/topics/new': 'topicNew'
   },
 
@@ -26,7 +27,6 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
       model: board
     });
     this._swapView(showView)
-
   },
 
   boardNew: function(){
@@ -82,8 +82,15 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     }
   },
 
+  topicEdit: function(id){
+      var topic = DominionStrategyClone.Collections.topics.getOrFetch(id);
+      var editView = new DominionStrategyClone.Views.TopicEdit({
+        model: topic
+      });
+      this._swapView(editView);
+  },
+
   _swapView: function(view){
-    console.log("hello from swap view")
     this._currentView && this._currentView.remove();
     this._currentView = view;
     this.$rootEl.html(view.render().$el);
