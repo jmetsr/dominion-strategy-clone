@@ -7,6 +7,7 @@ end
 
 json.replies @topic.replies do |reply|
   json.id reply.id
-  json.user_id reply.user_id
+  json.user reply.user, :username
   json.content reply.content
+  json.user_id reply.user_id
 end
