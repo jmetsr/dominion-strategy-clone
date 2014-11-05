@@ -18,5 +18,6 @@ DominionStrategyClone::Application.routes.draw do
     resources :topics, only: [:show, :edit, :update, :destroy, :index, :create] do
       resources :replies, only: [:new, :create]
     end
+    resources :replies, only: [:create]
   end
 end

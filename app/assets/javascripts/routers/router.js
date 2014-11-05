@@ -10,6 +10,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     'boards/:id/edit': 'boardEdit',
     'topics/:id': 'topicShow',
     'topics/:id/edit': 'topicEdit',
+    'topics/:id/replies/new': 'replyNew',
     'boards/:id/topics/new': 'topicNew'
   },
 
@@ -88,6 +89,22 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
         model: topic
       });
       this._swapView(editView);
+  },
+
+  replyNew: function(id){
+    if (DominionStrategyClone.loggedIn){
+      var topic = DominionStrategyClone.Collections.topics.getOrFetch(id);
+      var newView = new DominionStrategyClone.Views.ReplyNew({
+        model: topic,
+        reply: new DominionStrategyClone.Models.Reply
+      });
+      this._swapView(newView)
+    } else {
+        var indexView = new DominionStrategyClone.Views.BoardsIndex({
+          collection: DominionStrategyClone.Collections.boards
+        })
+        this._swapView(indexView);
+      }
   },
 
   _swapView: function(view){

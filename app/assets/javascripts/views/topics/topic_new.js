@@ -18,8 +18,6 @@ DominionStrategyClone.Views.TopicNew = Backbone.View.extend({
     event.preventDefault();
     titl = this.$("#title").val();
     bod = this.$("#body").val();
-    console.log(titl);
-    console.log(bod);
     this.topic.save({user_id: DominionStrategyClone.currentUserId,
        title: titl, body: bod, board_id: this.model.get('id')},{
       success: function(){
