@@ -66,9 +66,6 @@
  <li class="reply">
    <ul class="reply-data">
 
-
-
-
        <% if @topic.user != nil %>
        <li class="author">Author:
          <%= link_to(@topic.user.username, user_url(@topic.user)) %>
@@ -100,13 +97,6 @@
       <% end %>
     </ul>
   </li>
-
-
-
-
-
-
-
 <% @topic.replies.each do |reply|%>
 <li class="reply">
 <ul class="reply-data">
@@ -120,11 +110,7 @@
        <%= reply.content %>
      </li>
    </div>
-
-
     <% if current_user && reply.user_id == current_user.id %>
-
-
     <div class="reply-links">
       <form action="<%= reply_url(reply) %>" method="post">
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -139,15 +125,6 @@
 </li>
 <% end %>
 </ul>
-
-
-
-
-
-
-
-
-
 <% if logged_in %>
   <%= link_to("Post Reply", new_topic_reply_url(@topic.id)) %>
 <% end %>

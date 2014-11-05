@@ -1,5 +1,6 @@
 DominionStrategyClone.Views.TopicShow = Backbone.View.extend({
 
+
   template: JST['topics/show'],
   render: function(){
     var renderedContent = this.template({

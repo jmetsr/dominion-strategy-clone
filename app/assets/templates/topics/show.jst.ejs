@@ -1,1 +1,75 @@
-;kjbfrlrtnbtrlonn onikniknil
+<style>
+  .container {
+    width: 100%;
+    padding: 10px;
+  }
+  .board {
+    display: block;
+    font-size: 180%;
+    margin: auto;
+    width: 330px;
+    border-bottom: 2px solid blue;
+  }
+  .topic {
+    font-size: 230%;
+    width: 100%;
+    margin: auto;
+  }
+  .reply-data {
+    width: 100%;
+  }
+  .reply-content {
+    overflow: scroll;
+    display: block;
+    padding: 2px;
+    width: 700px;
+    float: left;
+    height: 100px;
+    background: #DFF0AF;
+  }
+  .parent {
+    width: 100%;
+  }
+  .author {
+    float: left;
+    width: 100px;
+    background: #A8F9FD;
+  }
+  .reply {
+    width: 100%;
+  }
+  .reply-links: {
+    display: block;
+    background: solid blue;
+    align: right;
+  }
+  .group:after {
+    content: "";
+    clear: both;
+  }
+</style>
+<div class="container group">
+<div class="board"> Board: <a href="#boards/<%= topic.get('board_id') %>"> <%= topic.board().get('title') %> </a> </div><br>
+<div class="topic"> Topic: <%= topic.get('title') %></div>
+</div>
+<br>
+
+
+
+
+<ul class="parent">
+ <li class="reply">
+   <ul class="reply-data">
+
+       <% if (topic.get('user_id') != null ) { %>
+       <li class="author">Author:
+         <a href="users/<%= topic.get('user_id') %>"> <%= topic.user().get('username') %> </a>
+       </li>
+      <% } else { %>
+      <li class="author">
+        The author of this topic has deleted their profile
+      </li>
+      <% } %>
+    </ul>
+  </li>
+</ul>
