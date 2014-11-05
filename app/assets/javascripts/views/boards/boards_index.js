@@ -19,16 +19,9 @@ DominionStrategyClone.Views.BoardsIndex = Backbone.View.extend({
   deleteBoard: function(){
     event.preventDefault();
     var id = parseInt(event.target.id);
-    console.log(id);
-    console.log(this.collection.models)
     var model = this.collection.get(id);
-    console.log(model);
-
-
-
     model.destroy();
     this.collection.fetch();
-
   }
 
 })
