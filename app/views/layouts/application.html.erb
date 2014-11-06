@@ -20,7 +20,7 @@
   <%= "Hello #{current_user.username} "%>
   <ul>
   <% current_user.notifications.each do |notification| %>
-  <li> <%= notification.text %> </li>
+  <li> <%= link_to(notification.text, notification.url) %> </li>
   <% end %>
   </div>
 <% end %>
