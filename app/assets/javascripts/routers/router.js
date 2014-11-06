@@ -11,7 +11,8 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     'topics/:id': 'topicShow',
     'topics/:id/edit': 'topicEdit',
     'topics/:id/replies/new': 'replyNew',
-    'boards/:id/topics/new': 'topicNew'
+    'boards/:id/topics/new': 'topicNew',
+    'replies/:id/edit': 'replyEdit'
   },
 
   boardsIndex: function(){
@@ -105,6 +106,16 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
         })
         this._swapView(indexView);
       }
+  },
+
+  replyEdit: function(id){
+    console.log("hello from replyEdit")
+    var reply = DominionStrategyClone.Collections.replies.getOrFetch(id);
+    var editView = new DominionStrategyClone.Views.ReplyEdit({
+      model: reply
+    });
+    this._swapView(editView);
+    console.log("swapped the view")
   },
 
   _swapView: function(view){

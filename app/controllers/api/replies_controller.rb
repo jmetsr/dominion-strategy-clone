@@ -18,6 +18,16 @@ class Api::RepliesController < ApplicationController
     @replies = Reply.all
     render :json => @replies
   end
+  def edit
+    @reply = Reply.find(params[:id])
+    render :show
+  end
+  def update
+  end
+  def show
+    @reply = Reply.find(params[:id])
+    render :show
+  end
 
   def reply_params
     params.require(:reply).permit(:content,:topic_id,:user_id)

@@ -27,8 +27,6 @@ DominionStrategyClone.Models.Topic = Backbone.Model.extend({
     return this._user
   },
 
-
-
   parse: function(response){
    if (response.replies){
       this.replies().set(response.replies, { parse: true });
