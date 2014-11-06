@@ -24,7 +24,7 @@ DominionStrategyClone.Models.Reply = Backbone.Model.extend({
       delete response.topic;
     }
     if (response.user){
-      this.user().set(response.topic, { parse: true});
+      this.user().set(response.user, { parse: true});
       delete response.user;
     }
     return response;

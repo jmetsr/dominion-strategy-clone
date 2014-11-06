@@ -1,5 +1,6 @@
 class Api::RepliesController < ApplicationController
   before_filter :reguire_login
+
   def new
     @reply = Reply.new
     render :new
@@ -23,6 +24,12 @@ class Api::RepliesController < ApplicationController
     render :show
   end
   def update
+    @reply = Reply.find(params[:id])
+    if @reply.update_attributes(reply_params)
+      render :json => @reply
+    else
+      render :json => @reply.errors.full_messages, status: 422
+    end
   end
   def show
     @reply = Reply.find(params[:id])

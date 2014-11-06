@@ -20,12 +20,14 @@ DominionStrategyClone.Views.ReplyEdit = Backbone.View.extend({
     var that = this;
     event.preventDefault();
     cont = this.$("#content").val();
-    this.model.save({content: cont, id: this.model.get("id"), topic_id: this.model.get("topic_id")},{
+
+    this.model.save({content: cont},{
       success: function(){
         Backbone.history.navigate("#/topics/" + that.model.get('topic_id'), {trigger: true});
       },
       error: function(){
         alert("Invalid fields, try again");
+        console.log(that.model.attributes)
        }
      })
    }
