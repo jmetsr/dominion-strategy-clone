@@ -17,6 +17,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
 
   boardsIndex: function(){
     $('#errors').html("")
+    console.log('boardsIndex')
     var indexView = new DominionStrategyClone.Views.BoardsIndex({
       collection: DominionStrategyClone.Collections.boards
     })
@@ -89,20 +90,11 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
 
   topicEdit: function(id){
     $('#errors').html("")
-    if (DominionStrategyClone.currentUserId === id){
       var topic = DominionStrategyClone.Collections.topics.getOrFetch(id);
       var editView = new DominionStrategyClone.Views.TopicEdit({
         model: topic
       });
       this._swapView(editView);
-    } else {
-      $('#errors').html("Sorry, you don't have permission to access this section")
-      var indexView = new DominionStrategyClone.Views.BoardsIndex({
-        collection: DominionStrategyClone.Collections.boards
-      })
-      this._swapView(indexView);
-    }
-
   },
 
   replyNew: function(id){
@@ -121,7 +113,8 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
 
   replyEdit: function(id){
     $('#errors').html("")
-    reply = DominionStrategyClone.Collections.replies.getOrFetch(id);
+    var reply = DominionStrategyClone.Collections.replies.getOrFetch(id);
+
     var editView = new DominionStrategyClone.Views.ReplyEdit({
       model: reply
     });
@@ -129,8 +122,10 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   },
 
   _swapView: function(view){
+    console.log(view.initialize)
     this._currentView && this._currentView.remove();
     this._currentView = view;
     this.$rootEl.html(view.render().$el);
+
   }
 })

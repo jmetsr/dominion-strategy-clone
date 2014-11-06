@@ -1,19 +1,25 @@
 DominionStrategyClone.Views.ReplyEdit = Backbone.View.extend({
-  url: 'api/replies',
+
   template: JST['replies/edit'],
   render: function(){
-    if (this.model.get('user_id') === parseInt(DominionStrategyClone.currentUserId)){
+
+    console.log(this.model.get('user_id'))
+    console.log(this.model)
+    if (DominionStrategyClone.loggedIn && DominionStrategyClone.currentUserId === this.model.get('user_id')) {
+      $('#errors').html("")
       var renderedContent = this.template({
         reply: this.model
       })
+      console.log('if condition is true')
       this.$el.html(renderedContent);
     } else {
-      Backbone.history.navigate('#', {trigger: true});
+      $('#errors').html("Sorry, you don't have permission to access that section")
     }
 
     return this;
   },
   initialize: function(){
+    this.model.fetch()
     this.listenTo(this.model, 'sync', this.render)
     console.log('initialies the view')
   },

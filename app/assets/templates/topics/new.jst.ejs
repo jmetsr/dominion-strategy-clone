@@ -2,10 +2,10 @@
 <h1><%= board.get('title') %></h1>
 <h1> Start new topic </h1><br><br>
 <label> Title
-<input type="text" value="<% topic.get('title') %>" id="title">
+<input type="text" value="<%= topic.get('title') %>" id="title">
 </label><br><br>
 <label> Body <br>
-<textarea rows="12" cols="80" value="<% topic.get('body') %>" id="body"></textarea>
+<textarea rows="12" cols="80" value="<%= topic.get('body') %>" id="body"></textarea>
 </label><br>
 <form>
 <input type="submit" value="post">

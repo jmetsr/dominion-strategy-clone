@@ -3,7 +3,7 @@
 </div>
 
 <script>
-  DominionStrategyClone.currentUserId = <%= current_user.try(:id) || "null" %>;
+  DominionStrategyClone.currentUserId = <%= current_user.try(:id) %>
   DominionStrategyClone.loggedIn = <%= logged_in %>
   DominionStrategyClone.isAdmin = <%= current_user.try(:admin) || "false" %>
 
