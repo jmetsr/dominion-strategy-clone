@@ -35,6 +35,11 @@ class Api::RepliesController < ApplicationController
     @reply = Reply.find(params[:id])
     render :show
   end
+  def destroy
+    @reply = Reply.find(params[:id])
+    @reply.destroy
+    render :json => @reply
+  end
 
   def reply_params
     params.require(:reply).permit(:content,:topic_id,:user_id)

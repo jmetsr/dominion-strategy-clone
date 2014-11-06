@@ -13,13 +13,20 @@ DominionStrategyClone.Views.TopicShow = Backbone.View.extend({
     this.model.fetch();
   },
   events: {
-    'submit form': 'destroyTopic'
+    'submit form': 'destroyTopic',
+    'click button': 'removeReply'
   },
   destroyTopic: function(){
     var board_id = this.model.get('board_id');
     event.preventDefault();
     this.model.destroy();
     Backbone.history.navigate("#boards/"+ board_id, {trigger: true})
+  },
+  removeReply: function(){
+    event.preventDefault();
+    var id = parseInt(event.target.id);
+    this.model.replies().get(id).destroy();
+    this.render();
   }
 
 

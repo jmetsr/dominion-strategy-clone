@@ -47,6 +47,16 @@
     content: "";
     clear: both;
   }
+  .remove {
+      float: left;
+  }
+  .edit {
+    position: relative;
+    top: 24px;
+    right: 115px;
+  }
+
+
 </style>
 <div class="container group">
 <div class="board"> Board: <a href="#boards/<%= topic.get('board_id') %>"> <%= topic.board().get('title') %> </a> </div><br>
@@ -84,7 +94,7 @@
             </li>
           </form>
             <li>
-              <a href="#topics/<%= topic.get('id') %>/edit">edit topic</a>
+              <a href="#topics/<%= topic.id %>/edit">edit topic</a>
             </li>
         </div>
 
@@ -106,10 +116,8 @@
   </div>
   <% if (reply.get('user_id') === DominionStrategyClone.currentUserId) { %>
    <div class="reply-links">
-     <form>
-       <li><input type="submit" value="remove reply" class="submit"></li>
-     </form>
-     <li><a href='users/<%= reply.get('user_id') %>'>edit reply</a></li>
+    <li><button class="remove" id="<%= reply.get('id') %>">remove reply</button></li>
+    <li><a href='#/replies/<%= reply.get('id') %>/edit' class="edit">edit reply</a></li>
    </div>
 
   <% } %>
