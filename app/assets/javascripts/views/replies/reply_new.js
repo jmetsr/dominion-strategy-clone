@@ -22,7 +22,8 @@ DominionStrategyClone.Views.ReplyNew = Backbone.View.extend({
     event.preventDefault();
     cont = this.$('#content').val();
     id = this.model.get('id');
-    this.reply.save({user_id: DominionStrategyClone.currentUserId, content: cont, topic_id: id},{
+
+    this.reply.save({user_id: parseInt(DominionStrategyClone.currentUserId), content: cont, topic_id: id},{
       success: function(){
         Backbone.history.navigate('#/topics/'+ id,{ trigger: true })
       },
