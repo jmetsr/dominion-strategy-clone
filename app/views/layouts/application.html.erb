@@ -18,6 +18,10 @@
 <% if logged_in %>
   <div class="hello">
   <%= "Hello #{current_user.username} "%>
+  <ul>
+  <% current_user.notifications.each do |notification| %>
+  <li> <%= notification.text %> </li>
+  <% end %>
   </div>
 <% end %>
 
