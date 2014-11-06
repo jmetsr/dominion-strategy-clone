@@ -11,7 +11,7 @@
  *= require_self
  *= require_tree .
  */
-html, body, a, li, ul, table, tr, td, div, h1, h2, h3, input[type="text"], input[type="submit"], button {
+html, body, a, li, ul, table, tr, td, div, h1, h2, h3, input[type="text"], input[type="password"], input[type="submit"], button {
   margin: 0;
   padding: 0;
   border: 0;
@@ -28,7 +28,7 @@ li, ul {
   list-style: none;
 }
 
-input[type="text"], input[type="submit"], button {
+input[type="text"], input[type="password"], input[type="submit"], button {
   -webkit-appearance: none;
   cursor: pointer;
 }
@@ -58,7 +58,7 @@ body {
   padding: 3px;
 }
 
-input[type="text"], input[type="submit"], a, button {
+input[type="text"], input[type="submit"], input[type="password"], a, button {
   font-weight: bold;
   padding: 8px;
   border: 3px solid black;
