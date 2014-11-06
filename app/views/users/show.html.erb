@@ -8,11 +8,6 @@
 }
 </style>
 
-
-
-
-
-
 <h1><%= @user.username %>'s Profile Page!</h1>
 
 <% if @user.admin %>
@@ -29,7 +24,7 @@
   <ul>
     <% @user.topics.each do |topic| %>
 <li class="topic-container">
-  <div class="topic"><%= link_to(topic.title, topic_url(topic)) %>
+  <div class="topic"><%= link_to(topic.title, '/#topics/' + topic.id.to_s) %>
   </div>
   </li>
 

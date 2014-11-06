@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to(boards_url)
+    redirect_to("#")
   end
 
   def session_params
