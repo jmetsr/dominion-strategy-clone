@@ -26,6 +26,12 @@ class User < ActiveRecord::Base
       primary_key: :id,
       foreign_key: :user_id
     )
+    has_many(
+      :notifications,
+      :class_name => "Notification",
+      primary_key: :id,
+      foreign_key: :user_id
+    )
 
   def set_session_token
     self.session_token ||= generate_session_token

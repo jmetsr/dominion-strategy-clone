@@ -27,7 +27,7 @@
         <%= topic.get("title") %>
       </a>
     </td>
-    <% if (typeof topic.get("user") !== "undefined") { %>
+    <% if ( topic.get("user") !== null) { %>
       <td>
         <a href="users/<%= topic.get('user_id') %>">
           <%= topic.get("user") %>

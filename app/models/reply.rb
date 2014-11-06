@@ -2,7 +2,8 @@ class Reply < ActiveRecord::Base
   validates :user_id, presence: true
   validates :topic_id, presence: true
   validates :content, presence: true
-
+  after_create :set_notification
+  has_many :notifications, as: :notifiable, inverse_of: :notifiable, dependent: :destroy
   belongs_to(
       :user,
       :class_name => "User",
@@ -15,5 +16,14 @@ class Reply < ActiveRecord::Base
       primary_key: :id,
       foreign_key: :topic_id
   )
+  def set_notification
+    notification = self.notifications.new
+    notification.is_read = false
+    notification.event_id = 1
+    notification.user_id = self.topic.user.id
+    notification.save!
+  end
+
+
 
 end
