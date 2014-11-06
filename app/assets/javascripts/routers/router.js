@@ -16,6 +16,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   },
 
   boardsIndex: function(){
+    $('#errors').html("")
     var indexView = new DominionStrategyClone.Views.BoardsIndex({
       collection: DominionStrategyClone.Collections.boards
     })
@@ -24,6 +25,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   },
 
   boardShow: function(id){
+    $('#errors').html("")
     var board = DominionStrategyClone.Collections.boards.getOrFetch(id);
     var showView = new DominionStrategyClone.Views.BoardShow({
       model: board
@@ -32,6 +34,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   },
 
   boardNew: function(){
+    $('#errors').html("")
     if (DominionStrategyClone.isAdmin) {
       var newView = new DominionStrategyClone.Views.BoardNew;
       this._swapView(newView);
@@ -45,6 +48,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   },
 
   boardEdit: function(id){
+    $('#errors').html("")
     var board = DominionStrategyClone.Collections.boards.getOrFetch(id);
     if (DominionStrategyClone.isAdmin) {
       var editView = new DominionStrategyClone.Views.BoardEdit({
@@ -52,6 +56,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
       });
       this._swapView(editView);
     } else {
+      $('#errors').html("You need to be an admin to access this section")
       var indexView = new DominionStrategyClone.Views.BoardsIndex({
         collection: DominionStrategyClone.Collections.boards
       })
@@ -60,6 +65,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   },
 
   topicShow: function(id){
+    $('#errors').html("")
     var topic = DominionStrategyClone.Collections.topics.getOrFetch(id);
     var showView = new DominionStrategyClone.Views.TopicShow({
       model: topic
@@ -68,6 +74,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   },
 
   topicNew: function(id){
+    $('#errors').html("")
     var board = DominionStrategyClone.Collections.boards.getOrFetch(id);
     if (DominionStrategyClone.loggedIn) {
       var newView = new DominionStrategyClone.Views.TopicNew({
@@ -76,23 +83,30 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
       });
       this._swapView(newView);
     } else {
-      $('#errors').html("You need to be an logged in to access this section")
-      var indexView = new DominionStrategyClone.Views.BoardsIndex({
-        collection: DominionStrategyClone.Collections.boards
-      })
-      this._swapView(indexView);
+      document.location.href='/session/new?no_access=true';
     }
   },
 
   topicEdit: function(id){
+    $('#errors').html("")
+    if (DominionStrategyClone.currentUserId === id){
       var topic = DominionStrategyClone.Collections.topics.getOrFetch(id);
       var editView = new DominionStrategyClone.Views.TopicEdit({
         model: topic
       });
       this._swapView(editView);
+    } else {
+      $('#errors').html("Sorry, you don't have permission to access this section")
+      var indexView = new DominionStrategyClone.Views.BoardsIndex({
+        collection: DominionStrategyClone.Collections.boards
+      })
+      this._swapView(indexView);
+    }
+
   },
 
   replyNew: function(id){
+    $('#errors').html("")
     if (DominionStrategyClone.loggedIn){
       var topic = DominionStrategyClone.Collections.topics.getOrFetch(id);
       var newView = new DominionStrategyClone.Views.ReplyNew({
@@ -101,21 +115,25 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
       });
       this._swapView(newView)
     } else {
-        var indexView = new DominionStrategyClone.Views.BoardsIndex({
-          collection: DominionStrategyClone.Collections.boards
-        })
-        this._swapView(indexView);
+        document.location.href='/session/new?no_access=true';
       }
   },
 
   replyEdit: function(id){
-    console.log("hello from replyEdit")
-    var reply = DominionStrategyClone.Collections.replies.getOrFetch(id);
-    var editView = new DominionStrategyClone.Views.ReplyEdit({
-      model: reply
-    });
-    this._swapView(editView);
-    console.log("swapped the view")
+    $('#errors').html("")
+    if (DominionStrategyClone.currentUserId === id){
+      var reply = DominionStrategyClone.Collections.replies.getOrFetch(id);
+      var editView = new DominionStrategyClone.Views.ReplyEdit({
+        model: reply
+      });
+      this._swapView(editView);
+    } else {
+        $('#errors').html("Sorry, you don't have permission to access this section")
+        var indexView = new DominionStrategyClone.Views.BoardsIndex({
+          collection: DominionStrategyClone.Collections.boards
+        })
+        this._swapView(indexView);
+    }
   },
 
   _swapView: function(view){

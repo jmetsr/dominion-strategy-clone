@@ -29,7 +29,7 @@
     </td>
     <% if (typeof topic.get("user") !== "undefined") { %>
       <td>
-        <a href="users/<%= topic.get("user").id %>">
+        <a href="users/<%= topic.get('user_id') %>">
           <%= topic.get("user") %>
         </a>
       </td>

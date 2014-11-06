@@ -24,7 +24,7 @@ DominionStrategyClone.Views.TopicNew = Backbone.View.extend({
         Backbone.history.navigate('#topics/' + that.topic.get('id'), {trigger: true});
       },
       error: function(){
-        alert('in valid fields, try again')
+        alert('Body and Title can not be blank. Try filing out the form again')
       }
     })
   },

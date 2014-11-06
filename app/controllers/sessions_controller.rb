@@ -4,6 +4,9 @@ class SessionsController < ApplicationController
   before_filter :reguire_login, only: :destroy
 
   def new
+    if params[:no_access]
+      flash.now[:errors] = "only registered members are allowed to access this section. Please login below or register an account with Dominion Strategy Forum Clone"
+    end
     @user = User.new
     render :new
   end

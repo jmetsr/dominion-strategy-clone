@@ -4,8 +4,6 @@ DominionStrategyClone.Views.TopicEdit = Backbone.View.extend({
   render: function(){
     var userid = DominionStrategyClone.currentUserId;
     if (this.model.get('user_id')){
-      console.log(this.model.get('user_id'))
-      console.log(userid)
       if (this.model.get('user_id') === userid){
         var renderedContent = this.template({
           topic: this.model
