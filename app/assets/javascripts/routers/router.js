@@ -121,19 +121,11 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
 
   replyEdit: function(id){
     $('#errors').html("")
-    if (DominionStrategyClone.currentUserId === id){
-      var reply = DominionStrategyClone.Collections.replies.getOrFetch(id);
-      var editView = new DominionStrategyClone.Views.ReplyEdit({
-        model: reply
-      });
-      this._swapView(editView);
-    } else {
-        $('#errors').html("Sorry, you don't have permission to access this section")
-        var indexView = new DominionStrategyClone.Views.BoardsIndex({
-          collection: DominionStrategyClone.Collections.boards
-        })
-        this._swapView(indexView);
-    }
+    reply = DominionStrategyClone.Collections.replies.getOrFetch(id);
+    var editView = new DominionStrategyClone.Views.ReplyEdit({
+      model: reply
+    });
+    this._swapView(editView);
   },
 
   _swapView: function(view){

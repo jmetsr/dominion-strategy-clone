@@ -16,7 +16,7 @@
     margin: auto;
   }
   .reply-data {
-    width: 100%;
+
   }
   .reply-content {
     overflow: scroll;
@@ -37,23 +37,28 @@
   }
   .reply {
     width: 100%;
+    float: left;
   }
   .reply-links: {
     display: block;
-    background: solid blue;
-    align: right;
+    float: left;
+    width: 50px;
+    height: 200px;
+    background: solid green;
+
   }
   .group:after {
+    display: block;
     content: "";
     clear: both;
   }
   .remove {
-      float: left;
+    display: block;
+    width: 200px;
   }
   .edit {
-    position: relative;
-    top: 24px;
-    right: 115px;
+    display: block;
+    width: 200px;
   }
 
 
@@ -69,60 +74,73 @@
 
 <ul class="parent">
  <li class="reply">
-   <ul class="reply-data">
+   <ul class="reply-data group">
 
-       <% if (topic.get('user_id') != null ) { %>
+
        <li class="author">Author:
-         <a href="users/<%= topic.get('user_id') %>"> <%= topic.user().get('username') %> </a>
-       </li>
-      <% } else { %>
-      <li class="author">
-        The author of this topic has deleted their profile
+         <% if (topic.get('user_id') != null ) { %>
+           <a href="users/<%= topic.get('user_id') %>"> <%= topic.user().get('username') %> </a>
+          <% } else { %>
+            The author of this topic has deleted their profile
+          <% } %>
       </li>
-      <% } %>
-      <div class="reply-content">
-        <li class="content">
+
+      <li class="reply-content">
+        <div class="content">
            <%= topic.get('body') %>
-        </li>
-      </div>
+        </div>
+      </li>
 
       <% if (topic.get('user_id') == DominionStrategyClone.currentUserId) { %>
-        <div class="reply-links">
-          <form>
+
+        <li class="reply-links">
+        <ul>
+
             <li>
+              <form>
                 <input type="submit" value="remove topic" class="submit">
+              </form>
             </li>
-          </form>
             <li>
               <a href="#topics/<%= topic.id %>/edit">edit topic</a>
             </li>
-        </div>
+        </ul>
+        </li>
+
 
       <% } %>
     </ul>
   </li>
   <% topic.replies().each(function(reply) { %>
+
   <li class="reply">
-  <ul class="reply-data">
+  <ul class="reply-data group">
     <% if (typeof reply.get('user_id') !== "undefined") { %>
        <li class="author">Author: <a href='users/<%= reply.get('user_id') %>'><%= reply.user().get('username') %></a></li>
     <% } else { %>
        <li class="author">the author of this reply has deleted their profile</li>
     <% } %>
-  <div class="reply-content">
-    <li class="content">
+
+  <li class="reply-content">
+    <div class="content">
       <%= reply.get('content') %>
-    </li>
-  </div>
+    </div>
+  </li>
+
   <% if (reply.get('user_id') === DominionStrategyClone.currentUserId) { %>
-   <div class="reply-links">
-    <li><button class="remove" id="<%= reply.get('id') %>">remove reply</button></li>
-    <li><a href='#/replies/<%= reply.get('id') %>/edit' class="edit">edit reply</a></li>
-   </div>
+   <li class="reply-links">
+     <ul>
+
+       <li><button class="submit" id="<%= reply.get('id') %>">remove reply</button></li>
+       <li><a href='#/replies/<%= reply.get('id') %>/edit'>edit reply</a></li>
+
+    </ul>
+  </li>
 
   <% } %>
   </ul>
   </li>
+
   <% }) %>
 </ul>
 <% if (DominionStrategyClone.loggedIn) { %>

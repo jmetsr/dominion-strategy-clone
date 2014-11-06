@@ -2,11 +2,15 @@ DominionStrategyClone.Views.ReplyEdit = Backbone.View.extend({
   url: 'api/replies',
   template: JST['replies/edit'],
   render: function(){
-    console.log('rendered the view')
-    var renderedContent = this.template({
-      reply: this.model
-    })
-    this.$el.html(renderedContent)
+    if (this.model.get('user_id') === parseInt(DominionStrategyClone.currentUserId)){
+      var renderedContent = this.template({
+        reply: this.model
+      })
+      this.$el.html(renderedContent);
+    } else {
+      Backbone.history.navigate('#', {trigger: true});
+    }
+
     return this;
   },
   initialize: function(){
