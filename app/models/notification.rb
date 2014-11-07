@@ -17,7 +17,7 @@ class Notification < ActiveRecord::Base
 
   def url
     reply = self.notifiable
-    return "#/topics/" + reply.topic_id.to_s
+    return "/#/topics/" + reply.topic_id.to_s
   end
 
   def text

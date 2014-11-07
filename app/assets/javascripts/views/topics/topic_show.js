@@ -7,6 +7,7 @@ DominionStrategyClone.Views.TopicShow = Backbone.View.extend({
     })
     this.$el.html(renderedContent)
     return this;
+    
   },
   initialize: function(){
     this.listenTo(this.model, 'sync', this.render)

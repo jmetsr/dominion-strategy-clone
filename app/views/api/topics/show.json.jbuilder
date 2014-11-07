@@ -10,4 +10,5 @@ json.replies @topic.replies do |reply|
   json.user reply.user, :username
   json.content reply.content
   json.user_id reply.user_id
+  json.notifications reply.notifications
 end
