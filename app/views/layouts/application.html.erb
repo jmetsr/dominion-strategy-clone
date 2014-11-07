@@ -20,7 +20,9 @@
   <%= "Hello #{current_user.username} "%>
 
   <% if current_user.notifications.select{|n| n.is_read == false}.length != 0 %>
+    <div id="notifications">
     <%= link_to("youv'e got notifications!",'/#/notifications') %>
+    </div>
   <% end %>
   </div>
 <% end %>
