@@ -7,11 +7,24 @@ DominionStrategyClone.Views.TopicShow = Backbone.View.extend({
     })
     this.$el.html(renderedContent)
     return this;
-    
+
   },
   initialize: function(){
+    var that = this;
     this.listenTo(this.model, 'sync', this.render)
-    this.model.fetch();
+    this.model.fetch({
+      success: function(){
+        that.model.replies().each(function(reply){
+          reply.notifications().each(function(notification){
+            if (notification.get('user_id') === DominionStrategyClone.currentUserId){
+              notification.save({is_read: true});
+              console.log('set succsessfull')
+            }
+          })
+        })
+      }
+    });
+
   },
   events: {
     'submit form': 'destroyTopic',

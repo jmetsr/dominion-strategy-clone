@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user.admin = false
     if @user.save
       login(@user)
-      redirect_to(boards_url)
+      redirect_to('/#')
     else
       if @user.password.length == 0
         flash.now[:errors] = "Password field empty"

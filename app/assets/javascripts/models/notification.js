@@ -9,8 +9,6 @@ DominionStrategyClone.Models.Notification = Backbone.Model.extend({
     return this._user;
   },
 
-
-
   parse: function(response){
     if (response.user){
       this.user().set(response.user, { parse: true});

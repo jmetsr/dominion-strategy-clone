@@ -12,8 +12,6 @@ DominionStrategyClone.Views.BoardsIndex = Backbone.View.extend({
   },
   initialize: function(){
     this.listenTo(this.collection, 'sync', this.render)
-
-    console.log('initialize indexView')
   },
   events: {
       'click button': 'deleteBoard'

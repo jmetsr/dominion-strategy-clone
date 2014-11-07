@@ -14,7 +14,7 @@ DominionStrategyClone.Models.Topic = Backbone.Model.extend({
       this._board = new DominionStrategyClone.Models.Board();
       this._board.id = this.board_id
     }
-    this._board.fetch()
+//    this._board.fetch()
     return this._board
   },
 
@@ -23,7 +23,7 @@ DominionStrategyClone.Models.Topic = Backbone.Model.extend({
       this._user = new DominionStrategyClone.Models.User();
       this._user.id = this.user_id
     }
-    this._user.fetch()
+//    this._user.fetch()
     return this._user
   },
 

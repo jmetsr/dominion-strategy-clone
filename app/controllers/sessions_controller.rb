@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     user = User.find_by_credentials(session_params["username"],session_params["password"])
     if user
       login(user)
-      redirect_to(boards_url)
+      redirect_to("/#")
     else
       flash.now[:errors] = "That username does not exist or you have the wrong password"
       @user = User.new(session_params)

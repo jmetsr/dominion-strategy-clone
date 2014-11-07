@@ -18,9 +18,9 @@
 <% if logged_in %>
   <div class="hello">
   <%= "Hello #{current_user.username} "%>
-  <ul>
-  <% current_user.notifications.each do |notification| %>
-  <li> <%= link_to(notification.text, notification.url) %> </li>
+
+  <% if current_user.notifications.select{|n| n.is_read == false}.length != 0 %>
+    <%= link_to("youv'e got notifications!",'/#/notifications') %>
   <% end %>
   </div>
 <% end %>

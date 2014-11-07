@@ -1,7 +1,7 @@
 DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   initialize: function(){
     this.$rootEl = $('#main');
-    console.log('hello from the router')
+  //  console.log('hello from the router')
   },
   routes: {
     '': 'boardsIndex',
@@ -12,12 +12,12 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     'topics/:id/edit': 'topicEdit',
     'topics/:id/replies/new': 'replyNew',
     'boards/:id/topics/new': 'topicNew',
-    'replies/:id/edit': 'replyEdit'
+    'replies/:id/edit': 'replyEdit',
+    'notifications': 'notificationIndex'
   },
 
   boardsIndex: function(){
     $('#errors').html("")
-    console.log('boardsIndex')
     var indexView = new DominionStrategyClone.Views.BoardsIndex({
       collection: DominionStrategyClone.Collections.boards
     })
@@ -120,9 +120,17 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     });
     this._swapView(editView);
   },
+  notificationIndex: function(){
+    $('#errors').html("")
+    var indexView = new DominionStrategyClone.Views.NotificationsIndex({
+      collection: DominionStrategyClone.Collections.notifications
+    });
+    DominionStrategyClone.Collections.notifications.fetch();
+    this._swapView(indexView);
+  },
 
   _swapView: function(view){
-    console.log(view.initialize)
+  //  console.log(view.initialize)
     this._currentView && this._currentView.remove();
     this._currentView = view;
     this.$rootEl.html(view.render().$el);

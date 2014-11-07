@@ -1,0 +1,7 @@
+<ul>
+<% notifications.each(function(notification) { %>
+<% if (!(notification.get('is_read'))) { %>
+<li><a href="<%= notification.get('url') %>" id="<%= notification.get('id') %>"><%= notification.get('text') %></a></li>
+<% } %>
+<% }) %>
+</ul>
