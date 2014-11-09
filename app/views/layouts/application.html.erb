@@ -8,37 +8,50 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="pageheadborder">
+  <div class="pagehead">
+  <div class="top">
 <h1>Dominion Strategy Forum</h1>
+  </div>
 <div id="errors">
   <%= flash[:errors] %>
 </div>
 
 
-
+<div class="hello">
 <% if logged_in %>
-  <div class="hello">
   <%= "Hello #{current_user.username} "%>
+<% else %>
+  Welcome, Guest
+<% end %>
+</div>
 
-  <% if current_user.notifications.select{|n| n.is_read == false}.length != 0 %>
-    <div id="notifications">
-    <%= link_to("youv'e got notifications!",'/#/notifications') %>
-    </div>
-  <% end %>
+
+<% if current_user && current_user.notifications.select{|n| n.is_read == false}.length != 0 %>
+  <div id="notifications" class="notifications">
+    <%= link_to("Show new replies to your posts.",'/#/notifications') %>
   </div>
 <% end %>
+</div>
+</div>
 
-<ul class="nav-bar">
+
+
+<div class="group">
+
+<ul class="nav-bar group">
   <li class="nav home">
     <a href="/#">HOME</a>
   </li>
 <% if logged_in %>
+  <li class="nav">
   <form action="<%= session_url %>" method="POST">
     <input type="hidden" name="_method" value="DELETE">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-  <li class ="nav">
-      <input type="submit" value="LOGOUT" class="submit">
-  </li>
+
+    <input type="submit" value="LOGOUT" class="submit">
   </form>
+</li>
 
 
   <li class="nav">
@@ -70,8 +83,10 @@
 <% end %>
 </ul>
 
-
+</div>
+<div class="main-content">
 <%= yield %>
+</div>
 
 </body>
 </html>

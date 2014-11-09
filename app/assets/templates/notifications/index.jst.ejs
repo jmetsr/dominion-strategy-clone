@@ -5,3 +5,6 @@
 <% } %>
 <% }) %>
 </ul>
+<% if (notifications.where({is_read: false}).length === 0) { %>
+No new replies to your posts
+<% } %>

@@ -14,21 +14,14 @@ DominionStrategyClone.Views.TopicShow = Backbone.View.extend({
     this.listenTo(this.model, 'sync', this.render)
     this.model.fetch({
       success: function(){
-        DominionStrategyClone.all_read = true;
         that.model.replies().each(function(reply){
           reply.notifications().each(function(notification){
             if (notification.get('user_id') === DominionStrategyClone.currentUserId){
               notification.save({is_read: true});
               console.log('set succsessfull')
             }
-            else {
-              DominionStrategyClone.all_read = false;
-            }
           })
         })
-        if (DominionStrategyClone.all_read){
-          $('#notifications').html("")
-        }
       }
     });
 
