@@ -63,7 +63,7 @@ body {
   margin-top: 18px;
   }
 input[type="text"], input[type="submit"], input[type="password"], a, button {
-    font-weight: bold;
+
     padding: 8px;
     border: none;
   }
@@ -140,4 +140,8 @@ input[type="text"], input[type="submit"], input[type="password"], a, button {
  }
  .main-content{
    margin-top: 20px;
+ }
+ h3 {
+   font-size: 15px;
+   padding-bottom: 20px;
  }

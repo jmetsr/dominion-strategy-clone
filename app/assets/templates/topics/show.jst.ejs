@@ -25,7 +25,6 @@
     width: 700px;
     float: left;
     height: 100px;
-    background: #DFF0AF;
   }
   .parent {
     width: 100%;
@@ -33,7 +32,6 @@
   .author {
     float: left;
     width: 100px;
-    background: #A8F9FD;
   }
   .reply {
     width: 100%;
@@ -60,16 +58,33 @@
     display: block;
     width: 200px;
   }
+  .a-head {
+    float: left;
+    display: block;
+    width: 300px;
+    margin-left: 10px;
+  }
+  .top-head {
+    text-align: right;
+    margin-right: 500px;
+  }
+  .heading {
+    padding: 10px;
+    background: #425C76;
+    color: white;
+  }
 
 
 </style>
-<div class="container group">
-<div class="board"> Board: <a href="#boards/<%= topic.get('board_id') %>"> <%= topic.board().get('title') %> </a> </div><br>
-<div class="topic"> Topic: <%= topic.get('title') %></div>
-</div>
+<h3>Dominion Strategy Forum  >  <a href="#boards/<%= topic.get('board_id') %>">  <%= topic.board().get('title') %> </a>
+   > <%= topic.get('title') %> </h3>
+
 <br>
 
-
+<div class="heading group">
+<div class="a-head">Author</div>
+<div class="top-head"> Topic: <%= topic.board().get('title') %></div>
+</div>
 
 
 <ul class="parent">
@@ -77,7 +92,7 @@
    <ul class="reply-data group">
 
 
-       <li class="author">Author:
+       <li class="author">
          <% if (topic.get('user_id') != null ) { %>
            <a href="users/<%= topic.get('user_id') %>"> <%= topic.user().get('username') %> </a>
           <% } else { %>
@@ -116,7 +131,7 @@
   <li class="reply">
   <ul class="reply-data group">
     <% if (typeof reply.get('user_id') !== "undefined") { %>
-       <li class="author">Author: <a href='users/<%= reply.get('user_id') %>'><%= reply.user().get('username') %></a></li>
+       <li class="author"> <a href='users/<%= reply.get('user_id') %>'><%= reply.user().get('username') %></a></li>
     <% } else { %>
        <li class="author">the author of this reply has deleted their profile</li>
     <% } %>
