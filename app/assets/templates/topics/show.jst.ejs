@@ -19,31 +19,38 @@
 
   }
   .reply-content {
-    overflow: scroll;
     display: block;
     padding: 2px;
-    width: 700px;
+    width: 900px;
     float: left;
-    height: 100px;
+    min-height: 100px;
+    margin-left: 10px;
+
+  }
+  .content {
+    margin-top: 5px;
   }
   .parent {
     width: 100%;
+    border: 1px solid black;
+    margin-bottom: 15px;
   }
   .author {
     float: left;
     width: 100px;
+    margin-left: 10px;
+    margin-top: 8px;
   }
   .reply {
     width: 100%;
     float: left;
+    border-bottom: 1px solid grey;
   }
   .reply-links: {
     display: block;
-    float: left;
-    width: 50px;
-    height: 200px;
-    background: solid green;
-
+    float: right;
+    width: 100px;
+    background: 1px solid black;
   }
   .group:after {
     display: block;
@@ -65,14 +72,40 @@
     margin-left: 10px;
   }
   .top-head {
-    text-align: right;
-    margin-right: 500px;
+    text-align: left;
   }
   .heading {
     padding: 10px;
     background: #425C76;
     color: white;
+    border: 1px solid black;
   }
+  .blue {
+    background: #E8E8F0;
+  }
+  .white {
+    background: #F4F4F4;
+  }
+  .reply-link {
+    float: right;
+    display: block;
+  }
+  .subject-line {
+    margin-top: 13px;
+    border-bottom: solid black 1px
+  }
+  .post {
+    float: right;
+    color: white;
+    position: relative;
+    bottom: 36px;
+    background: #526B91;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border: 1px solid black;
+  }
+
+
 
 
 </style>
@@ -81,15 +114,21 @@
 
 <br>
 
+<% if (DominionStrategyClone.loggedIn) { %>
+  <div class="post"><a href='#topics/<%= topic.get('id') %>/replies/new'>Reply</a></div>
+<% } %>
+
 <div class="heading group">
 <div class="a-head">Author</div>
 <div class="top-head"> Topic: <%= topic.board().get('title') %></div>
 </div>
 
 
-<ul class="parent">
- <li class="reply">
+
+<ul class="parent group">
+ <li class="reply blue">
    <ul class="reply-data group">
+
 
 
        <li class="author">
@@ -100,35 +139,39 @@
           <% } %>
       </li>
 
-      <li class="reply-content">
+      <li class="reply-content group">
+        <% if (topic.get('user_id') == DominionStrategyClone.currentUserId) { %>
+
+          <div class="reply-links">
+          <ul>
+
+              <li>
+                <form>
+                  <div class="reply-link"><input type="submit" value="Remove" class="submit"><div>
+                </form>
+              </li>
+              <li>
+                <div class="reply-link"><a href="#topics/<%= topic.id %>/edit">Modify</a></div>
+              </li>
+          </ul>
+        </div>
+        <% } %>
+
+
+        <div class="subject-line"> <%= topic.get('title') %></div>
         <div class="content">
            <%= topic.get('body') %>
         </div>
       </li>
 
-      <% if (topic.get('user_id') == DominionStrategyClone.currentUserId) { %>
 
-        <li class="reply-links">
-        <ul>
-
-            <li>
-              <form>
-                <input type="submit" value="remove topic" class="submit">
-              </form>
-            </li>
-            <li>
-              <a href="#topics/<%= topic.id %>/edit">edit topic</a>
-            </li>
-        </ul>
-        </li>
-
-
-      <% } %>
     </ul>
   </li>
+
+  <% DominionStrategyClone.indicator = "white" %>
   <% topic.replies().each(function(reply) { %>
 
-  <li class="reply">
+  <li class="reply <%= DominionStrategyClone.indicator %>">
   <ul class="reply-data group">
     <% if (typeof reply.get('user_id') !== "undefined") { %>
        <li class="author"> <a href='users/<%= reply.get('user_id') %>'><%= reply.user().get('username') %></a></li>
@@ -137,27 +180,31 @@
     <% } %>
 
   <li class="reply-content">
+  <% if (reply.get('user_id') === DominionStrategyClone.currentUserId) { %>
+   <div class="reply-links">
+     <ul>
+
+       <li><button class="submit reply-link" id="<%= reply.get('id') %>">Remove</button></li>
+       <li><div class="reply-link"><a href='#/replies/<%= reply.get('id') %>/edit'>Modify</a></div></li>
+
+    </ul>
+  </div>
+
+  <% } %>
+
+    <div class="subject-line">Re: <%= topic.get('title') %></div>
     <div class="content">
       <%= reply.get('content') %>
     </div>
   </li>
 
-  <% if (reply.get('user_id') === DominionStrategyClone.currentUserId) { %>
-   <li class="reply-links">
-     <ul>
 
-       <li><button class="submit" id="<%= reply.get('id') %>">remove reply</button></li>
-       <li><a href='#/replies/<%= reply.get('id') %>/edit'>edit reply</a></li>
-
-    </ul>
-  </li>
-
-  <% } %>
   </ul>
   </li>
-
+  <% if (DominionStrategyClone.indicator === "white") { %>
+    <% DominionStrategyClone.indicator = "blue" %>
+  <% } else {  %>
+    <% DominionStrategyClone.indicator = "white" %>
+  <% } %>
   <% }) %>
 </ul>
-<% if (DominionStrategyClone.loggedIn) { %>
-  <a href='#topics/<%= topic.get('id') %>/replies/new'>Post Reply</a>
-<% } %>
