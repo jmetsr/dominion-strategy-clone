@@ -134,8 +134,9 @@ input[type="text"], input[type="submit"], input[type="password"], a, button {
    margin-top: 5px;
    margin-bottom: 5px;
  }
- a:active, input:active, button:active {
-   background: green;
+
+ a:hover, input:hover, button:hover {
+   text-decoration: underline;
  }
  .main-content{
    margin-top: 20px;

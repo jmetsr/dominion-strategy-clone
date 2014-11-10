@@ -11,35 +11,86 @@
     height: 75px;
     padding: 22px;
   }
+  h1 {
+  font-size: 15px;
+  padding-bottom: 20px;
+  }
+  .author {
+    margin: auto;
+
+
+  }
+  .subject {
+    float: left;
+    width: 610px;
+    margin: auto;
+
+  }
+  .heading {
+    background: #547497;
+    color: white;
+    padding: 9px;
+  }
+  .subject-cont {
+    float: left;
+    padding-left: 300px;
+
+  }
+  .author-cont {
+    float: left;
+    padding-left: 300px;
+
+  }
+  ul {
+    border: 2px solid white;
+  }
+  .ul-container {
+    border: 1px solid black;
+  }
+  .border-border {
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+
+
+
 </style>
 
-<h1> <%= board.get("title") %> </h1>
+<h1 class="boardname"> <%= board.get("title") %> </h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Author</th>
-  </tr>
+<div class="ul-container">
+<ul>
+<li class="heading group">
+  <div class="subject-cont">Subject</div>
+  <div class="author-cont">Started by</div>
+</li>
+
+
 <% board.topics().each(function(topic) { %>
-   <tr>
-    <td>
-      <a href="#/topics/<%= topic.id %>">
-        <%= topic.get("title") %>
-      </a>
-    </td>
-    <% if ( topic.get("user") !== null) { %>
-      <td>
-        <a href="users/<%= topic.get('user_id') %>">
-          <%= topic.get("user") %>
+  <li class="group">
+    <div class="border-border">
+      <div class="subject">
+        <a href="#/topics/<%= topic.id %>">
+          <%= topic.get("title") %>
         </a>
-      </td>
-    <% } else { %>
-       <td>The author of this Topic has deleted their profile</td>
-     <% } %>
-   </tr>
+      </div>
+    </div>
+    <div class="border-border">
+      <div class="author">
+          <% if ( topic.get("user") !== null) { %>
+            <a href="users/<%= topic.get('user_id') %>">
+              <%= topic.get("user") %>
+            </a>
+          <% } else { %>
+            The author of this Topic has deleted their profile
+          <% } %>
+      </div>
+    </div>
+  </li>
 <% }) %>
-</table>
-
+</ul>
+</div>
 
 <% if (DominionStrategyClone.loggedIn) { %>
   <div class="new-topic-container">
