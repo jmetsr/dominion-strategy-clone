@@ -15,10 +15,13 @@
   padding-bottom: 20px;
   }
   .author {
-    float: right;
+    float: left;
     background: #F4F4F4;
-    width: 620px;
+    width: 520px;
     border: 1px solid black;
+    position: fixed;
+    left: 700px;
+
 
   }
   .subject {
@@ -28,6 +31,9 @@
     border-left: 1px solid black;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
+
+
+
 
   }
   .heading {
@@ -62,6 +68,10 @@
     bottom: 54px;
   }
 
+  .item {
+    //position: absolute;
+  }
+
 
 
 </style>
@@ -84,7 +94,7 @@
 
 
 <% board.topics().each(function(topic) { %>
-  <li class="group">
+  <li class="group item">
     <div class="border-border">
       <div class="subject">
         <a href="#/topics/<%= topic.id %>">
