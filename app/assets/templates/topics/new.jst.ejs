@@ -1,12 +1,50 @@
 
-<h1><%= board.get('title') %></h1>
-<h1> Start new topic </h1><br><br>
-<label> Title
-<input type="text" value="<%= topic.get('title') %>" id="title">
-</label><br><br>
-<label> Body <br>
+<style>
+  .blue-bar {
+    width: 100%;
+    background: #6483A4;
+    color: white;
+    padding: 6px;
+  }
+
+  input[type="text"] {
+    background: white;
+    margin-left: 30px;
+  }
+
+  .new-top {
+    background: #E7E8F0;
+    width: 1392px;
+    padding-left: 60px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+  }
+  .make-post {
+    float: right;
+    background: white;
+    border-radius: 8px;
+    display: block;
+    position: relative;
+    right: 17px;
+  }
+
+  .make-post:active {
+    background: #2B75F9;
+  }
+</style>
+<h3><%= board.get('title') %></h3>
+
+<div class="blue-bar"> Start new topic </div>
+
+<div class="new-top">
+<label>
+  <strong>Subject:</strong>
+  <input type="text" value="<%= topic.get('title') %>" id="title">
+</label>
+<br><br><br>
 <textarea rows="12" cols="80" value="<%= topic.get('body') %>" id="body"></textarea>
-</label><br>
-<form>
-<input type="submit" value="post">
+<br>
+<form><div class="make-post">
+<input type="submit" value="post"></div>
 </form>
+</div>

@@ -89,6 +89,7 @@
   .reply-link {
     float: right;
     display: block;
+    font-size: 10px;
   }
   .subject-line {
     margin-top: 13px;
@@ -104,6 +105,7 @@
     border-top-left-radius: 20px;
     border: 1px solid black;
   }
+
 
 
 
@@ -147,7 +149,7 @@
 
               <li>
                 <form>
-                  <div class="reply-link"><input type="submit" value="Remove" class="submit"><div>
+                  <div class="reply-link submit"><input type="submit" value="Remove"></div>
                 </form>
               </li>
               <li>
@@ -192,9 +194,9 @@
 
   <% } %>
 
-    <div class="subject-line">Re: <%= topic.get('title') %></div>
+    <div class="subject-line">Re: <%= topic.escape('title') %></div>
     <div class="content">
-      <%= reply.get('content') %>
+      <%= reply.escape('content') %>
     </div>
   </li>
 

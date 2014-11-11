@@ -1,7 +1,27 @@
-Topic: <%= topic.get('title') %><br><br>
 
+<style>
+  .post {
+  width: 100%;
+  background: #6483A4;
+  color: white;
+  padding: 6px;
+  }
 
+  .make-reply {
+  float: right;
+  background: white;
+  border-radius: 8px;
+  }
+
+   .make-reply:active {
+    background: #2B75F9;
+  }
+
+</style>
+<h3> Dominion Strategy Forum > <%= topic.board().get('title') %> > Post reply ( Re: <%= topic.get('title') %> ) </h3>
+
+<div class="post">Post Reply</div>
 <form>
-  <textarea rows="12" cols="80" id="content"><%= reply.get('content') %></textarea><br><br>
-  <input type="submit" value="post">
+  <textarea rows="12" cols="286" id="content"><%= reply.get('content') %></textarea><br><br>
+  <div class="make-reply"><input type="submit" value="post"></div>
 </form>

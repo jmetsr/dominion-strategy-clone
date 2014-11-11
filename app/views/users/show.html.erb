@@ -17,10 +17,10 @@
 <% end %>
 <%= "#{@user.username} has posted #{@user.topics.count} topics, and #{@user.replies.count} replies" %>
 
-<br>
+<br><br>
 <% if @user.topics.length != 0 %>
 
-  <%= @user.username %>'s topics
+  <h1><%= @user.username %>'s topics</h1><br>
   <ul>
     <% @user.topics.each do |topic| %>
 <li class="topic-container">
