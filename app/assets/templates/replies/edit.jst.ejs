@@ -1,5 +1,28 @@
+<style>
+
+  input[type="text"] {
+    background: white;
+    margin-left: 30px;
+  }
+
+  .update {
+    float: right;
+    background: white;
+    border-radius: 8px;
+  }
+
+  .update:active {
+    background: #2B75F9;
+  }
+  
+</style>
+
+
 Topic: <%= reply.topic().get('title') %><br>
+
 <form>
-<input type="text" id="content" value="<%= reply.get("content") %>">
+<textarea id="content" rows="12" cols="286"><%= reply.get("content") %></textarea>
+<div class="update">
 <input type="submit" value="update">
+</div>
 </form>
