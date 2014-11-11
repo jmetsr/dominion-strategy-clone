@@ -1,4 +1,9 @@
-
+<style>
+input[type="text"] {
+  background: white;
+  margin-left: 30px;
+}
+</style>
 <form action="<%= user_url%>" method="post">
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="put">
