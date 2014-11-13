@@ -1,139 +1,26 @@
-<style>
-  .container {
-    width: 100%;
-    padding: 10px;
-  }
-  .board {
-    display: block;
-    font-size: 180%;
-    margin: auto;
-    width: 330px;
-    border-bottom: 2px solid blue;
-  }
-  .topic {
-    font-size: 230%;
-    width: 100%;
-    margin: auto;
-  }
-  .reply-data {
-
-  }
-  .reply-content {
-    display: block;
-    padding: 2px;
-    width: 900px;
-    float: left;
-    min-height: 100px;
-    margin-left: 10px;
-
-  }
-  .content {
-    margin-top: 5px;
-  }
-  .parent {
-    width: 100%;
-    border: 1px solid black;
-    margin-bottom: 15px;
-  }
-  .author {
-    float: left;
-    width: 100px;
-    margin-left: 10px;
-    margin-top: 8px;
-  }
-  .reply {
-    width: 100%;
-    float: left;
-    border-bottom: 1px solid grey;
-  }
-  .reply-links: {
-    display: block;
-    float: right;
-    width: 100px;
-    background: 1px solid black;
-  }
-  .group:after {
-    display: block;
-    content: "";
-    clear: both;
-  }
-  .remove {
-    display: block;
-    width: 200px;
-  }
-  .edit {
-    display: block;
-    width: 200px;
-  }
-  .a-head {
-    float: left;
-    display: block;
-    width: 300px;
-    margin-left: 10px;
-  }
-  .top-head {
-    text-align: left;
-  }
-  .heading {
-    padding: 10px;
-    background: #425C76;
-    color: white;
-    border: 1px solid black;
-  }
-  .blue {
-    background: #E8E8F0;
-  }
-  .white {
-    background: #F4F4F4;
-  }
-  .reply-link {
-    float: right;
-    display: block;
-    font-size: 10px;
-  }
-  .subject-line {
-    margin-top: 13px;
-    border-bottom: solid black 1px
-  }
-  .post {
-    float: right;
-    color: white;
-    position: relative;
-    bottom: 36px;
-    background: #526B91;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    border: 1px solid black;
-  }
-
-
-
-
-
-</style>
 <h3>Dominion Strategy Forum  >  <a href="#boards/<%= topic.get('board_id') %>">  <%= topic.board().get('title') %> </a>
    > <%= topic.get('title') %> </h3>
 
 <br>
 
 <% if (DominionStrategyClone.loggedIn) { %>
-  <div class="post"><a href='#topics/<%= topic.get('id') %>/replies/new'>Reply</a></div>
+  <div class="topic-show-post"><a href='#topics/<%= topic.get('id') %>/replies/new'>Reply</a></div>
 <% } %>
 
 <div class="heading group">
-<div class="a-head">Author</div>
-<div class="top-head"> Topic: <%= topic.board().get('title') %></div>
+<div class="topic-show-a-head">Author</div>
+<div class="topic-show-top-head"> Topic: <%= topic.board().get('title') %></div>
 </div>
 
 
 
-<ul class="parent group">
- <li class="reply blue">
-   <ul class="reply-data group">
+<ul class="topic-show-parent group">
+ <li class="topic-show-reply blue">
+   <ul class="topic-show-reply-data group">
 
 
 
-       <li class="author">
+       <li class="topic-show-author">
          <% if (topic.get('user_id') != null ) { %>
            <a href="users/<%= topic.get('user_id') %>"> <%= topic.user().get('username') %> </a>
           <% } else { %>
@@ -141,27 +28,27 @@
           <% } %>
       </li>
 
-      <li class="reply-content group">
+      <li class="topic-show-reply-content group">
         <% if (topic.get('user_id') == DominionStrategyClone.currentUserId) { %>
 
-          <div class="reply-links">
+          <div class="topic-show-reply-links">
           <ul>
 
               <li>
                 <form>
-                  <div class="reply-link submit"><input type="submit" value="Remove"></div>
+                  <div class="topic-show-reply-link submit"><input type="submit" value="Remove"></div>
                 </form>
               </li>
               <li>
-                <div class="reply-link"><a href="#topics/<%= topic.id %>/edit">Modify</a></div>
+                <div class="topic-show-reply-link"><a href="#topics/<%= topic.id %>/edit">Modify</a></div>
               </li>
           </ul>
         </div>
         <% } %>
 
 
-        <div class="subject-line"> <%= topic.get('title') %></div>
-        <div class="content">
+        <div class="topic-show-subject-line"> <%= topic.get('title') %></div>
+        <div class="topic-show-content">
            <%= topic.get('body') %>
         </div>
       </li>
@@ -173,29 +60,29 @@
   <% DominionStrategyClone.indicator = "white" %>
   <% topic.replies().each(function(reply) { %>
 
-  <li class="reply <%= DominionStrategyClone.indicator %>">
-  <ul class="reply-data group">
+  <li class="topic-show-reply topic-show-<%= DominionStrategyClone.indicator %>">
+  <ul class="topic-show-reply-data group">
     <% if (typeof reply.get('user_id') !== "undefined") { %>
-       <li class="author"> <a href='users/<%= reply.get('user_id') %>'><%= reply.user().get('username') %></a></li>
+       <li class="topic-show-author"> <a href='users/<%= reply.get('user_id') %>'><%= reply.user().get('username') %></a></li>
     <% } else { %>
-       <li class="author">the author of this reply has deleted their profile</li>
+       <li class="topic-show-author">the author of this reply has deleted their profile</li>
     <% } %>
 
-  <li class="reply-content">
+  <li class="topic-show-reply-content">
   <% if (reply.get('user_id') === DominionStrategyClone.currentUserId) { %>
-   <div class="reply-links">
+   <div class="topic-show-reply-links">
      <ul>
 
-       <li><button class="submit reply-link" id="<%= reply.get('id') %>">Remove</button></li>
-       <li><div class="reply-link"><a href='#/replies/<%= reply.get('id') %>/edit'>Modify</a></div></li>
+       <li><button class="topic-show-submit topic-show-reply-link" id="<%= reply.get('id') %>">Remove</button></li>
+       <li><div class="topic-show-reply-link"><a href='#/replies/<%= reply.get('id') %>/edit'>Modify</a></div></li>
 
     </ul>
   </div>
 
   <% } %>
 
-    <div class="subject-line">Re: <%= topic.escape('title') %></div>
-    <div class="content">
+    <div class="topic-show-subject-line">Re: <%= topic.escape('title') %></div>
+    <div class="topic-show-content">
       <%= reply.escape('content') %>
     </div>
   </li>

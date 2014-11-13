@@ -1,0 +1,100 @@
+.topic-show-container {
+  width: 100%;
+  padding: 10px;
+}
+.topic-show-board {
+  display: block;
+  font-size: 180%;
+  margin: auto;
+  width: 330px;
+  border-bottom: 2px solid blue;
+}
+.topic-show-topic {
+  font-size: 230%;
+  width: 100%;
+  margin: auto;
+}
+
+.topic-show-reply-content {
+  display: block;
+  padding: 2px;
+  width: 900px;
+  float: left;
+  min-height: 100px;
+  margin-left: 10px;
+
+}
+.topic-show-content {
+  margin-top: 5px;
+}
+.topic-show-parent {
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 15px;
+}
+.topic-show-author {
+  float: left;
+  width: 100px;
+  margin-left: 10px;
+  margin-top: 8px;
+}
+.topic-show-reply {
+  width: 100%;
+  float: left;
+  border-bottom: 1px solid grey;
+}
+.topic-show-reply-links: {
+  display: block;
+  float: right;
+  width: 100px;
+  background: 1px solid black;
+}
+.group:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.topic-show-remove {
+  display: block;
+  width: 200px;
+  float: right;
+}
+.topic-show-edit {
+  display: block;
+  width: 200px;
+}
+.topic-show-a-head {
+  float: left;
+  display: block;
+  width: 300px;
+  margin-left: 10px;
+}
+.topic-show-top-head {
+  text-align: left;
+}
+
+.topic-show-blue {
+  background: #E8E8F0;
+}
+.topic-show-white {
+  background: #F4F4F4;
+}
+.topic-show-reply-link {
+  float: right;
+  display: block;
+  font-size: 10px;
+}
+.topic-show-subject-line {
+  margin-top: 13px;
+  border-bottom: solid black 1px
+}
+.topic-show-post {
+  float: right;
+  color: white;
+  position: relative;
+  bottom: 36px;
+  background: #526B91;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border: 1px solid black;
+}
