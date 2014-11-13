@@ -3,6 +3,9 @@ class Topic < ActiveRecord::Base
   validates :title, presence: true
   validates :body, presence: true
 
+  include PgSearch
+   multisearchable :against => [:title, :body]
+
   belongs_to(
       :user,
       :class_name => "User",

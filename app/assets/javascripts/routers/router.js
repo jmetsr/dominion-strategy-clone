@@ -14,6 +14,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     'boards/:id/topics/new': 'topicNew',
     'replies/:id/edit': 'replyEdit',
     'notifications': 'notificationIndex'
+    'search':'searchNew'
   },
 
   boardsIndex: function(){
@@ -121,12 +122,17 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     this._swapView(editView);
   },
   notificationIndex: function(){
-    $('#errors').html("")
+    $('#errors').html("");
     var indexView = new DominionStrategyClone.Views.NotificationsIndex({
       collection: DominionStrategyClone.Collections.notifications
     });
     DominionStrategyClone.Collections.notifications.fetch();
     this._swapView(indexView);
+  },
+  searchNew: function(){
+    $('#errors').html("");
+    var searchView = new DominionStrategyClone.Views.Search({});
+    this.swapView(searchView)
   },
 
   _swapView: function(view){

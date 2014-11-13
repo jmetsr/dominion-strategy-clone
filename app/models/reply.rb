@@ -2,6 +2,10 @@ class Reply < ActiveRecord::Base
   validates :user_id, presence: true
   validates :topic_id, presence: true
   validates :content, presence: true
+
+  include PgSearch
+   multisearchable :against => :content
+
   after_create :set_notification
   has_many :notifications, as: :notifiable, inverse_of: :notifiable, dependent: :destroy
   belongs_to(
