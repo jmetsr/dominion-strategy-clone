@@ -13,7 +13,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
     'topics/:id/replies/new': 'replyNew',
     'boards/:id/topics/new': 'topicNew',
     'replies/:id/edit': 'replyEdit',
-    'notifications': 'notificationIndex'
+    'notifications': 'notificationIndex',
     'search':'searchNew'
   },
 
@@ -132,7 +132,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   searchNew: function(){
     $('#errors').html("");
     var searchView = new DominionStrategyClone.Views.Search({});
-    this.swapView(searchView)
+    this._swapView(searchView);
   },
 
   _swapView: function(view){
