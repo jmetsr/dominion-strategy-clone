@@ -131,7 +131,7 @@ DominionStrategyClone.Routers.Router = Backbone.Router.extend({
   },
   searchNew: function(){
     $('#errors').html("");
-    var searchView = new DominionStrategyClone.Views.Search({});
+    var searchView = new DominionStrategyClone.Views.Search();
     this._swapView(searchView);
   },
 
