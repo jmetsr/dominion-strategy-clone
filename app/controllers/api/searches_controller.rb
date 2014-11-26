@@ -2,8 +2,8 @@ class Api::SearchesController < ApplicationController
 
   def index
 
-    find = params["text"]
-    render :json => PgSearch.multisearch(find)
+    @results = PgSearch.multisearch(params[:query]).includes(:searchable).map(&:searchable)
+    render :show
   end
 
 end

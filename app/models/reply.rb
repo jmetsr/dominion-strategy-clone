@@ -4,7 +4,7 @@ class Reply < ActiveRecord::Base
   validates :content, presence: true
 
   include PgSearch
-   multisearchable :against => :content
+  multisearchable :against => :content
 
   after_create :set_notification
   has_many :notifications, as: :notifiable, inverse_of: :notifiable, dependent: :destroy
@@ -27,7 +27,5 @@ class Reply < ActiveRecord::Base
     notification.user_id = self.topic.user.id
     notification.save!
   end
-
-
 
 end

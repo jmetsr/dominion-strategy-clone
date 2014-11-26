@@ -9,14 +9,20 @@ DominionStrategyClone.Views.Search = Backbone.View.extend({
     this.$el.html(renderedContent);
 
     var resultsContainer = this.$('#search-results');
+
     this.results.each(function (result) {
+
       var view;
-      if (result.constructor === DominionStrategyClone.Models.Reply) {
+      console.log(result.attributes)
+      console.log(DominionStrategyClone.Models.Reply)
+      console.log(result instanceof DominionStrategyClone.Models.Reply)
+      if (result instanceof DominionStrategyClone.Models.Reply) {
         view = new DominionStrategyClone.Views.ReplyLI(result);
       } else {
         view = new DominionStrategyClone.Views.TopicLI(result);
       }
       resultsContainer.append(view.render().$el);
+
     });
     return this;
   },
@@ -25,12 +31,14 @@ DominionStrategyClone.Views.Search = Backbone.View.extend({
   },
   conductSearch: function(){
     event.preventDefault();
-    this.querry = this.$("#s").val();
+    this.query = this.$("#s").val();
     this.results.fetch({
       data: {
         query: this.query
       }
     });
+    console.log(this.query);
+
   }
 
 })

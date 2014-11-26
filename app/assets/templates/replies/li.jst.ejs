@@ -1,0 +1,10 @@
+<article>
+
+
+  <% console.log("reply: " + reply.get("content")) %>
+  <a href="#/topics/<%= reply.get('topic_id') %>">
+
+    <%= reply.get('content').substring(0,30) %>
+  </a>
+
+</article>
