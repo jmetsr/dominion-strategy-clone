@@ -1,0 +1,55 @@
+.bs-new-topic {
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  background: #4A6A8D;
+  display: block;
+  padding-left: 18px;
+  padding-right: 5px;
+  width: 75px;
+  border: 1px solid black;
+}
+
+.bs-author {
+  float: left;
+  background: #F4F4F4;
+  width: 520px;
+  border: 1px solid black;
+  position: fixed;
+  left: 700px;
+}
+
+.bs-subject {
+  float: left;
+  width: 735px;
+  margin: auto;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.bs-subject-cont {
+  float: left;
+  padding-left: 300px;
+
+}
+.bs-author-cont {
+  float: left;
+  padding-left: 400px;
+
+}
+.bs-ul {
+  border: 2px solid white;
+}
+.bs-ul-container {
+  border: 1px solid black;
+}
+.bs-border-border {
+
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+.bs-new-topic-container {
+  float: right;
+  position: relative;
+  bottom: 54px;
+}

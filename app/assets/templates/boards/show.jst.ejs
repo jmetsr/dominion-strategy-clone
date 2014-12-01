@@ -1,101 +1,31 @@
-<style>
-  .new-topic {
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    background: #4A6A8D;
-    display: block;
-    padding-left: 18px;
-    padding-right: 5px;
-    width: 75px;
-    border: 1px solid black;
-  }
-
-  h1 {
-  font-size: 15px;
-  padding-bottom: 20px;
-  }
-  .author {
-    float: left;
-    background: #F4F4F4;
-    width: 520px;
-    border: 1px solid black;
-    position: fixed;
-    left: 700px;
-
-
-  }
-  .subject {
-    float: left;
-    width: 735px;
-    margin: auto;
-    border-left: 1px solid black;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-  }
-
-  .subject-cont {
-    float: left;
-    padding-left: 300px;
-
-  }
-  .author-cont {
-    float: left;
-    padding-left: 400px;
-
-  }
-  ul {
-    border: 2px solid white;
-  }
-  .ul-container {
-    border: 1px solid black;
-  }
-  .border-border {
-
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-  }
-  .new-topic-container {
-    float: right;
-    position: relative;
-    bottom: 54px;
-  }
-
-  .item {
-    //position: absolute;
-  }
-
-
-
-</style>
-
 <h3 class="boardname"> <%= board.get("title") %> </h3>
 <% if (DominionStrategyClone.loggedIn) { %>
-  <div class="new-topic-container">
-    <a href="#/boards/<%= board.id %>/topics/new" class="new-topic">
+  <div class="bs-new-topic-container new-topic-container">
+    <a href="#/boards/<%= board.id %>/topics/new" class="bs-new-topic">
       New Topic
     </a>
   </div>
 <% } %>
 
-<div class="ul-container">
-<ul>
+<div class="bs-ul-container">
+<ul class="bs-ul">
 <li class="heading group">
-  <div class="subject-cont">Subject</div>
-  <div class="author-cont">Started by</div>
+  <div class="bs-subject-cont">Subject</div>
+  <div class="bs-author-cont">Started by</div>
 </li>
 
 
 <% board.topics().each(function(topic) { %>
-  <li class="group item">
-    <div class="border-border">
-      <div class="subject">
+  <li class="group">
+    <div class="bs-border-border">
+      <div class="bs-subject">
         <a href="#/topics/<%= topic.id %>">
           <%= topic.get("title") %>
         </a>
       </div>
     </div>
-    <div class="border-border">
-      <div class="author">
+    <div class="bs-border-border">
+      <div class="bs-author">
           <% if ( topic.get("user") !== null) { %>
             <a href="users/<%= topic.get('user_id') %>">
               <%= topic.get("user") %>
