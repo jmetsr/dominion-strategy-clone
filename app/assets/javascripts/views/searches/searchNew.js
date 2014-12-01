@@ -13,15 +13,20 @@ DominionStrategyClone.Views.Search = Backbone.View.extend({
     this.results.each(function (result) {
 
       var view;
-      console.log(result.attributes)
+      console.log(result.attributes.reply)
       console.log(DominionStrategyClone.Models.Reply)
-      console.log(result instanceof DominionStrategyClone.Models.Reply)
-      if (result instanceof DominionStrategyClone.Models.Reply) {
-        view = new DominionStrategyClone.Views.ReplyLI(result);
-      } else {
+      if (!!result.attributes.topic){
         view = new DominionStrategyClone.Views.TopicLI(result);
+        resultsContainer.append(view.render().$el);
       }
-      resultsContainer.append(view.render().$el);
+
+      if (!!result.attributes.reply) {
+        console.log('result.reply')
+        view = new DominionStrategyClone.Views.ReplyLI(result);
+        resultsContainer.append(view.render().$el);
+      }
+
+
 
     });
     return this;

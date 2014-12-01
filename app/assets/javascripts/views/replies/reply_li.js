@@ -1,4 +1,4 @@
-DominionStrategyClone.Views.TargetLI = Backbone.View.extend({
+DominionStrategyClone.Views.ReplyLI = Backbone.View.extend({
   template: JST['replies/li'],
 
   initialize: function (reply) {

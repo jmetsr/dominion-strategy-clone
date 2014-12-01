@@ -1,6 +1,9 @@
 <article>
-  <a href="#/topics/<%= topic.get('id') %>">
-    <%= topic.get('title').substring(0,30) %>
+  <% if (typeof topic.get('topic') !== "undefined") { %>
+  <a href="#/topics/<%= topic.get('topic').id %>">
+    <%= console.log(topic.get('topic')) %>
+    <%= topic.get('topic').title %>
   </a>
+  <% } %>
 
 </article>
