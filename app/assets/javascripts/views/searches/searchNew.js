@@ -7,27 +7,20 @@ DominionStrategyClone.Views.Search = Backbone.View.extend({
   render: function(){
     var renderedContent = this.template();
     this.$el.html(renderedContent);
-
     var resultsContainer = this.$('#search-results');
 
     this.results.each(function (result) {
-
       var view;
-
       if (!!result.attributes.topic){
         view = new DominionStrategyClone.Views.TopicLI(result);
         resultsContainer.append(view.render().$el);
       }
-
       if (!!result.attributes.reply) {
-        console.log('result.reply')
         view = new DominionStrategyClone.Views.ReplyLI(result);
         resultsContainer.append(view.render().$el);
       }
-
-
-
     });
+
     return this;
   },
   events: {
@@ -39,9 +32,13 @@ DominionStrategyClone.Views.Search = Backbone.View.extend({
     this.results.fetch({
       data: {
         query: this.query
-      }
+      },
+      success: function(){
+        if (this.results.length === 0){
+          alert("Your search query didn't return any matches.")
+        }
+      }.bind(this)
     });
-    console.log(this.query);
 
   }
 
