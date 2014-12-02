@@ -43,7 +43,7 @@
   float: left;
   border-bottom: 1px solid grey;
 }
-.topic-show-reply-links: {
+.topic-show-reply-links {
   display: block;
   float: right;
   width: 100px;
