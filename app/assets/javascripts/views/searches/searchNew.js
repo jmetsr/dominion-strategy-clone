@@ -13,8 +13,7 @@ DominionStrategyClone.Views.Search = Backbone.View.extend({
     this.results.each(function (result) {
 
       var view;
-      console.log(result.attributes.reply)
-      console.log(DominionStrategyClone.Models.Reply)
+
       if (!!result.attributes.topic){
         view = new DominionStrategyClone.Views.TopicLI(result);
         resultsContainer.append(view.render().$el);

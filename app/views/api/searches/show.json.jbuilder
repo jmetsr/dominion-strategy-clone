@@ -1,4 +1,5 @@
-@results.each do |result|
+#@results.each do |result|
+json.array! @results do |result|
   if result.class == Reply
     json.reply do
       json.id result.id
