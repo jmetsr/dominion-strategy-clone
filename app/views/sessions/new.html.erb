@@ -8,6 +8,12 @@
   .sign:active {
     background: blue;
   }
+  .flashy {
+    background: red;
+  }
+  .flashy:active {
+    background: blue;
+  }
 </style>
 
 
@@ -24,6 +30,13 @@
   <div class="sign">
     <input type="submit" value="Sign In">
   </div>
-
-
 </form>
+<br><br>
+Or click here to post as a demo user:
+ 
+ <form action="<%= session_url %>" method="post">
+ <input type="hidden" name="user[username]" value="Demo User">
+ <input type="hidden" name="user[password]" value="Demo User">
+ <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+ <input type="submit" class"flashy" value="Demo Sign in">
+ </form>
