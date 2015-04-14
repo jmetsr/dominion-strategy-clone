@@ -38,6 +38,12 @@
   padding-left: 400px;
 
 }
+.bs-reply-cont {
+  float: right;
+  position: relative;
+  margin-right: -35px;
+
+}
 .bs-ul {
   border: 2px solid white;
 }
