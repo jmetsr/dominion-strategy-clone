@@ -5,4 +5,5 @@ json.topics @board.topics do |topic|
   json.title topic.title
   json.user topic.user && topic.user.username
   json.user_id topic.user_id
+  json.replies topic.replies
 end

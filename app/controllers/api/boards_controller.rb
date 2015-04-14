@@ -5,12 +5,12 @@ class Api::BoardsController < ApplicationController
 
   def index
     @boards = Board.all
-    render :json => @boards
+    render :index #renders the json template for board index
   end
 
   def show
     @board = Board.find(params[:id])
-    render :show
+    render :show #render the show template
   end
 
   def create

@@ -1,26 +1,41 @@
 <style>
-  .change {
+  .change {  /* Where to click to change a board - only visiable by admins */
     float: right;
     display: block;
     background: #547498;
   }
+  .topic {
+    float: left;
+    width: 60%;
+
+  }
+  .board-stats { /* place where number of topics and posts for each board is displayed */
+    background: #E6E8EE;
+    width: 17%;
+    float: right;
+    height: 48px;
+    border-left: 1px solid grey;
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 48px;
+  }
 
 
-</style>
+</style> 
 
-<h3> All Boards </h3>
+<h3> All Boards </h3> 
 <ul>
   <% boards.each(function(board) { %>
   <li class="topic-container">
     <div class="topic">
-      <a href="#/boards/<%= board.id %>">
+      <a href="#/boards/<%= board.id %>"> 
         <%= board.escape("title") %>
-         <% console.log(board.attributes) %>
       </a>
     </div>
 
     <% if (DominionStrategyClone.isAdmin) { %>
-      <div class="change">
+      <div class="change"> 
           <button id='<%= board.id %> '>
              REMOVE BOARD
           </button>
@@ -31,6 +46,14 @@
         </a>
       </div>
     <% } %>
+    <div class="board-stats">
+    <%= board.get('number_of_posts') %> Posts,
+    <%= board.get('number_of_topics') %> Topics
+
+    </div>
+
+
+
   </li>
   <% }) %>
 </ul>

@@ -18,14 +18,14 @@
 <% board.topics().each(function(topic) { %>
   <li class="group bs-subject-and-author">
     <div class="bs-border-border">
-      <div class="bs-subject">
+      <div class="bs-subject">        <!-- the "subject" column -->
         <a href="#/topics/<%= topic.id %>">
           <%= topic.get("title") %>
         </a>
       </div>
     </div>
     <div class="bs-border-border">
-      <div class="bs-author">
+      <div class="bs-author">           <!-- the "started by" column -->
           <% if ( topic.get("user") !== null) { %>
             <a href="users/<%= topic.get('user_id') %>">
               <%= topic.get("user") %>
@@ -35,6 +35,13 @@
           <% } %>
       </div>
     </div>
+
+    <div class="bs-replies">
+      <%= topic.replies().length %> replies
+      <% console.log(topic.replies()) %>
+    </div>
+ 
+    
   </li>
 <% }) %>
 </ul>
