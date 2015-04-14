@@ -8,41 +8,77 @@
   width: 75px;
   border: 1px solid black;
 }
-
-.bs-author {
-  float: left;
-  background: #F4F4F4;
-  width: 38%;
-  border: 1px solid black;
-  position: fixed;
-  left: 47%;
-}
-
 .bs-subject {
   float: left;
-  width: 47%;
+  width: 40%;
   margin: auto;
   border-left: 1px solid black;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   background: #E8E9F0;
+  height: 55px;
+  line-height: 55px;
+}
+.bs-author {
+  height: 55px;
+  float: left;
+  background: #F4F4F4;
+  width: 20%;
+  border: 1px solid black;
+  position: fixed;
+  left: 40%;
+  line-height: 55px;
 }
 
+
+.bs-replies {
+  float: left;
+  height: 55px;
+  width: 13%;
+  background: #E7E9F0;
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 55px;
+  position: fixed;
+  left: 60%;
+}
+.bs-last-post {
+  height: 55px;
+  color: black;
+  float: right;
+  background: #F4E6F4;
+  text-align: center;
+  vertical-align: top;
+  width: 27%;
+  border: 1px solid black;
+
+}
 .bs-subject-cont {
   float: left;
-  padding-left: 300px;
-
+  width: 40%;
+  text-align: center;
+  margin-top: 6px;
 }
 .bs-author-cont {
   float: left;
-  padding-left: 400px;
+  position: relative;
+  text-align: center;
+  margin-top: 6px;
+  width: 20%;
 
 }
 .bs-reply-cont {
+  float: left;
+  text-align: center;
+  margin-top: 6px;
+  width: 13%;
+}
+.bs-last-post-cont {
   float: right;
-  position: relative;
-  margin-right: -35px;
-
+  text-align: center;
+  margin-top: 6px;
+  width: 15%;
 }
 .bs-ul {
   border: 2px solid white;
@@ -60,13 +96,4 @@
   bottom: 54px;
 }
 
-.bs-replies {
-  float: right;
-  height: 32px;
-  width: 13%;
-  background: #E7E9F0;
-  border: 1px solid black;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 32px;
-}
+

@@ -12,14 +12,15 @@
 <li class="heading group">
   <div class="bs-subject-cont">Subject</div>
   <div class="bs-author-cont">Started by</div>
-   <div class="bs-reply-cont">Replies</div>
+  <div class="bs-reply-cont">Replies</div>
+  <div class="bs-last-post-cont">Last Post</div>
 </li>
 
 
 <% board.topics().each(function(topic) { %>
   <li class="group bs-subject-and-author">
     <div class="bs-border-border">
-      <div class="bs-subject">        <!-- the "subject" column -->
+      <div class="bs-subject">       <!-- the "subject" column -->
         <a href="#/topics/<%= topic.id %>">
           <%= topic.get("title") %>
         </a>
@@ -39,10 +40,13 @@
 
     <div class="bs-replies">
       <%= topic.replies().length %> replies
-      <% console.log(topic.replies()) %>
+
     </div>
- 
-    
+    <div class="bs-last-post">
+      <br> Last Post by
+      <%= topic.get('last_reply_name') %>, at <br>
+      <%= topic.get('last_reply_time').substring(5,16) %>
+    </div>
   </li>
 <% }) %>
 </ul>
