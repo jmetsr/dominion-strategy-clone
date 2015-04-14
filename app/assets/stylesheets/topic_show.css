@@ -18,10 +18,11 @@
 .topic-show-reply-content {
   display: block;
   padding: 2px;
-  width: 900px;
+  width: 800px;
   float: left;
   min-height: 100px;
   margin-left: 10px;
+
 
 }
 .topic-show-content {
@@ -42,6 +43,7 @@
   width: 100%;
   float: left;
   border-bottom: 1px solid grey;
+  background: #E8E8F0;
 }
 .topic-show-reply-links {
   display: block;
@@ -97,4 +99,9 @@
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   border: 1px solid black;
+}
+.icon {
+  width: 50px;
+  height: 80px;
+
 }

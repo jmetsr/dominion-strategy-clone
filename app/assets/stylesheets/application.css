@@ -46,7 +46,7 @@ h1 {
 
 }
 .top {
-  background: #5B7B9F;
+  background: #4C382A;
   color: white;
   padding: 8px;
   border: solid white 1px;
@@ -61,7 +61,7 @@ h1 {
 
 body {
   font-family: sans-serif;
-  background: #DFDFE3;
+  background: #BEAF88;
   margin-left: 60px;
   margin-right: 60px;
   margin-top: 18px;
@@ -73,7 +73,7 @@ input[type="text"], input[type="submit"], input[type="password"], a, button {
   }
 
 .hello {
-    background: #C8D4DF;
+    background: #DDDA90;
     padding: 10px;
     border: 1px solid white;
   }
@@ -146,3 +146,15 @@ input[type="text"], input[type="submit"], input[type="password"], a, button {
    font-size: 15px;
    padding-bottom: 20px;
  }
+
+ .crop {
+    width: 1200px;
+    height: 180px;
+    overflow: hidden;
+    vertical-align: auto;
+}
+
+.image {
+  position: relative;
+  left: 100px;
+}

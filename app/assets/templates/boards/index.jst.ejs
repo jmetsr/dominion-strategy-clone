@@ -8,13 +8,14 @@
 
 </style>
 
-<h3> Dominion Strategy Forum </h3>
+<h3> All Boards </h3>
 <ul>
   <% boards.each(function(board) { %>
   <li class="topic-container">
     <div class="topic">
       <a href="#/boards/<%= board.id %>">
         <%= board.escape("title") %>
+         <% console.log(board.attributes) %>
       </a>
     </div>
 

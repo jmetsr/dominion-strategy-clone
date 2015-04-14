@@ -12,20 +12,20 @@
 .bs-author {
   float: left;
   background: #F4F4F4;
-  width: 520px;
+  width: 48%;
   border: 1px solid black;
   position: fixed;
-  left: 700px;
-
+  left: 47%;
 }
 
 .bs-subject {
   float: left;
-  width: 735px;
+  width: 47%;
   margin: auto;
   border-left: 1px solid black;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+  background: #E8E9F0;
 }
 
 .bs-subject-cont {

@@ -1,4 +1,4 @@
-<h3>Dominion Strategy Forum  >  <a href="#boards/<%= topic.get('board_id') %>">  <%= topic.board().get('title') %> </a>
+<h3>All Boards  >  <a href="#boards/<%= topic.get('board_id') %>">  <%= topic.board().get('title') %> </a>
    > <%= topic.get('title') %> </h3>
 
 <br>
@@ -23,6 +23,7 @@
        <li class="topic-show-author">
          <% if (topic.get('user_id') != null ) { %>
            <a href="users/<%= topic.get('user_id') %>"> <%= topic.user().get('username') %> </a>
+            <img src=" <%= topic.user().get('photo_url') %>" class="icon">
           <% } else { %>
             The author of this topic has deleted their profile
           <% } %>
@@ -63,7 +64,9 @@
   <li class="topic-show-reply topic-show-<%= DominionStrategyClone.indicator %>">
   <ul class="topic-show-reply-data group">
     <% if (typeof reply.get('user_id') !== "undefined") { %>
-       <li class="topic-show-author"> <a href='users/<%= reply.get('user_id') %>'><%= reply.user().get('username') %></a></li>
+       <li class="topic-show-author"> <a href='users/<%= reply.get('user_id') %>'><%= reply.user().get('username') %></a>
+       <img src=" <%= reply.user().get('photo_url') %>" class="icon">
+       </li>
     <% } else { %>
        <li class="topic-show-author">the author of this reply has deleted their profile</li>
     <% } %>

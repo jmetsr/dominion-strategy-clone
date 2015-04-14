@@ -1,4 +1,4 @@
-<h3 class="boardname"> <%= board.get("title") %> </h3>
+<h3 class="boardname"> All Boards > <%= board.get("title") %> </h3>
 
   <div class="bs-new-topic-container new-topic-container">
     <a href="#/boards/<%= board.id %>/topics/new" class="bs-new-topic">
@@ -16,7 +16,7 @@
 
 
 <% board.topics().each(function(topic) { %>
-  <li class="group">
+  <li class="group bs-subject-and-author">
     <div class="bs-border-border">
       <div class="bs-subject">
         <a href="#/topics/<%= topic.id %>">
