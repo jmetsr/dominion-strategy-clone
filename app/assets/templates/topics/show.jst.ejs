@@ -48,7 +48,10 @@
         <% } %>
 
 
-        <div class="topic-show-subject-line"> <%= topic.get('title') %></div>
+        <div class="topic-show-subject-line"> <%= topic.get('title') %><br>
+        On <%= topic.escape('created_at').substring(6,10) %>
+           <%= topic.escape('created_at').substring(12,16) %>
+           </div>
         <div class="topic-show-content">
            <%= topic.get('body') %>
         </div>
@@ -59,7 +62,7 @@
   </li>
 
   <% DominionStrategyClone.indicator = "white" %>
-  <% topic.replies().each(function(reply) { %>
+  <% topic.replies().each(function(reply) { %> <!-- Here comes the list of all the replies -->
 
   <li class="topic-show-reply topic-show-<%= DominionStrategyClone.indicator %>">
   <ul class="topic-show-reply-data group">
@@ -82,9 +85,12 @@
     </ul>
   </div>
 
-  <% } %>
+  <% } %> <!-- The following is always displayed - regardless of who's logged in -->
 
-    <div class="topic-show-subject-line">Re: <%= topic.escape('title') %></div>
+    <div class="topic-show-subject-line">Re: <%= topic.escape('title') %><br>
+    On <%= reply.escape('created_at').substring(6,10) %> <!-- time stamp -->
+       <%= reply.escape('created_at').substring(12,16) %>
+    </div>
     <div class="topic-show-content">
       <%= reply.escape('content') %>
     </div>

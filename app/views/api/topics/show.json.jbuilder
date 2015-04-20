@@ -12,4 +12,5 @@ json.replies @topic.replies do |reply|
   json.content reply.content
   json.user_id reply.user_id
   json.notifications reply.notifications
+  json.created_at reply.created_at
 end
