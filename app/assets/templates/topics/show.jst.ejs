@@ -49,8 +49,7 @@
 
 
         <div class="topic-show-subject-line"> <%= topic.get('title') %><br>
-        On <%= topic.escape('created_at').substring(6,10) %>
-           <%= topic.escape('created_at').substring(12,16) %>
+        On <%= topic.escape('created_at') %>
            </div>
         <div class="topic-show-content">
            <%= topic.get('body') %>
@@ -88,8 +87,8 @@
   <% } %> <!-- The following is always displayed - regardless of who's logged in -->
 
     <div class="topic-show-subject-line">Re: <%= topic.escape('title') %><br>
-    On <%= reply.escape('created_at').substring(6,10) %> <!-- time stamp -->
-       <%= reply.escape('created_at').substring(12,16) %>
+    On <%= reply.escape('created_at') %> <!-- time stamp -->
+      
     </div>
     <div class="topic-show-content">
       <%= reply.escape('content') %>

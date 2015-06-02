@@ -22,7 +22,7 @@
   </tr>
 <% @board.topics.each do |topic| %>
    <tr> <td><%= link_to(topic.title, topic_url(topic)) %></td>
-     <% if topic.user != nil%>
+     <% if topic.user != nil %>
        <td><%= link_to(topic.user.username, user_url(topic.user)) %></td>
      <% else %>
        <td>The author of this Topic has deleted their profile</td>
