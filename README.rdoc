@@ -1,5 +1,6 @@
-This is a clone I made of http://forum.dominionstrategy.com/,
-which is basicly an example of a forum made by Simple Machines Forum software.
+This is a forum I made were people can discuss strategy for the game dominion.
+
+It was inspired by http://forum.dominionstrategy.com/ which is basicly an example of a forum made by Simple Machines Forum software.
 I created an API in rails for the forum. 
 The rails app also takes care of user authentication using BCrypt to store password digests securely.
 On top of the API is a frontend layer to the app designed in Backbone,
