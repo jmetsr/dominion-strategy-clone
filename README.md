@@ -13,5 +13,5 @@ On top of the API is a frontend layer to the app designed in Backbone.js
 
 The frontend includes css for responsize layout
 
-Check out the live demo at [here](http://www.dominion-strategy-forum.com/)
+Check out the live demo [here](http://www.dominion-strategy-forum.com/)
  
