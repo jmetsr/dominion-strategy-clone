@@ -1,6 +1,6 @@
 This is a forum I made were people can discuss strategy for the game dominion.
 
-It was inspired by http://forum.dominionstrategy.com/ which is basicly an example of a forum made by Simple Machines Forum software.
+It was inspired by [this website](http://forum.dominionstrategy.com/) which is basicly an example of a forum made by Simple Machines Forum software.
 
 I created an API in rails for the forum.
 The API uses jbuilder to render json views of all the boards, topics and replies.
@@ -13,5 +13,5 @@ On top of the API is a frontend layer to the app designed in Backbone.js
 
 The frontend includes css for responsize layout
 
-Check out the live demo at http://www.dominion-strategy-forum.com/
+Check out the live demo at [here](http://www.dominion-strategy-forum.com/)
  
